@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P 2nd ONE-MAN LIVE "A KISS"</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins for expressive titles, Noto Sans for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Define custom theme colors and fonts based on Material 3 Expressive and "A KISS" theme */
+        body {
+            font-family: 'Noto Sans', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+            background-color: #FFF8F9; /* Light pink background */
+            color: #4B4453;
+        }
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        .main-visual {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .main-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://live.0m-p.space/AKISS/AKISS-KV.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            transition: filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 0;
+        }
+        .main-visual:hover::before {
+            filter: blur(0px);
+        }
+        .header-content {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .main-visual:hover .header-content {
+            transform: translateY(150px); /* Increased value for a lower position */
+        }
+        .logo {
+            filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.9));
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem; /* 40px */
+            line-height: 1.2;
+            color: #D63384; /* Vibrant Pink */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 3.75rem; /* 60px */
+            }
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            border-radius: 24px; /* Expressive corner radius */
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(214, 51, 132, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(214, 51, 132, 0.15);
+        }
+        .custom-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23D63384' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .lang-menu {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-primary {
+            background-color: #E91E63;
+            color: white;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: #C2185B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Language Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="lang-menu p-2 rounded-full shadow-lg">
+            <button onclick="changeLanguage('ja')" class="lang-btn px-3 py-1 text-sm rounded-full transition-colors duration-300" data-lang="ja">日本語</button>
+            <button onclick="changeLanguage('zh')" class="lang-btn px-3 py-1 text-sm rounded-full transition-colors duration-300" data-lang="zh">简体中文</button>
+            <button onclick="changeLanguage('en')" class="lang-btn px-3 py-1 text-sm rounded-full transition-colors duration-300" data-lang="en">EN</button>
+        </div>
+    </div>
+
+    <!-- Header: Main Visual -->
+    <header id="main-header" class="h-screen min-h-[600px] main-visual flex flex-col items-center justify-center text-center text-white p-4">
+        <div class="header-content flex flex-col items-center">
+            <img src="https://live.0m-p.space/AKISS/AKISS-Logo.png" alt="A KISS Logo" class="logo w-4/5 max-w-2xl mb-4">
+            <h1 class="text-2xl md:text-3xl font-light tracking-widest mt-4" data-lang-key="officialSite">OFFICIAL SITE</h1>
+        </div>
+    </header>
+
+    <main class="py-16 md:py-24 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto space-y-20 md:space-y-32">
+
+            <!-- Section 1: Live Schedule -->
+            <section id="schedule" class="text-center">
+                <h2 class="section-title mb-12" data-lang-key="scheduleTitle">LIVE SCHEDULE</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                    <div class="card" data-lang-key="tokyo1"></div>
+                    <div class="card" data-lang-key="osaka"></div>
+                    <div class="card" data-lang-key="shanghai"></div>
+                    <div class="card" data-lang-key="hongkong"></div>
+                    <div class="card" data-lang-key="tokyo2"></div>
+                </div>
+            </section>
+
+            <!-- Section 2: Setlist -->
+            <section id="setlist">
+                <h2 class="section-title text-center mb-12" data-lang-key="setlistTitle">SETLIST</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="card">
+                        <div class="mb-6">
+                            <select id="setlist-selector" class="w-full p-4 bg-white/50 border border-pink-200 rounded-2xl focus:ring-2 focus:ring-pink-400 focus:outline-none custom-select text-lg">
+                                <!-- Options will be populated by JS -->
+                            </select>
+                        </div>
+                        <div id="setlist-display" class="space-y-3 text-lg leading-relaxed">
+                            <!-- Setlist will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Special EP -->
+            <section id="ep">
+                 <h2 class="section-title text-center mb-12" data-lang-key="epTitle">SPECIAL EP</h2>
+                 <div class="card md:grid md:grid-cols-2 md:gap-12 items-center">
+                     <div>
+                        <img src="https://live.0m-p.space/AKISS/RK-Cover.png" alt="RUNNING, KISSING Cover" class="w-full max-w-md mx-auto rounded-2xl shadow-lg mb-2 md:mb-0">
+                        <p class="text-center text-sm mt-2 text-gray-500">Art by SanKyu</p>
+                     </div>
+                     <div class="space-y-4 mt-8 md:mt-0">
+                        <h3 class="font-bold text-2xl md:text-3xl text-pink-600" data-lang-key="epName">0M_P 2nd ONE-MAN LIVE "A KISS" SPECIAL EP "RUNNING, KISSING"</h3>
+                        <p data-lang-key="epNumber">規格品番 UM0M-E001</p>
+                        <p data-lang-key="epArt">Art by SanKyu-Illustrator</p>
+                        <p data-lang-key="epRelease">2023.2.22 Release</p>
+                        <p data-lang-key="epRerelease">2025.11.5 Re-release</p>
+                        <p class="font-bold text-xl" data-lang-key="epPrice"></p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="https://album.0m-p.space/RK" target="_blank" class="btn-primary" data-lang-key="epSite">Special Site</a>
+                            <a href="https://0m-p.lnk.to/RK" target="_blank" class="btn-primary" data-lang-key="epListen">Listen / Download</a>
+                            <a href="https://0m-p.lnk.to/RK_ReV" target="_blank" class="btn-primary" data-lang-key="epBuyRe">Buying (Re-released)</a>
+                        </div>
+                        <div class="pt-6">
+                            <h4 class="font-bold text-xl mb-3" data-lang-key="tracklist">Track List</h4>
+                            <p class="whitespace-pre-line" data-lang-key="epTracks"></p>
+                        </div>
+                     </div>
+                 </div>
+            </section>
+
+            <!-- Section 4: Blu-ray & DVD -->
+            <section id="bluray">
+                <h2 class="section-title text-center mb-12" data-lang-key="bdTitle">Blu-ray & DVD</h2>
+                <div class="card space-y-6">
+                    <h3 class="font-bold text-2xl md:text-3xl text-pink-600" data-lang-key="bdRelease">2023.10.19 Release</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="p-4 bg-white/50 rounded-xl border border-pink-100" data-lang-key="bdStd"></div>
+                        <div class="p-4 bg-white/50 rounded-xl border border-pink-100" data-lang-key="bdLtd"></div>
+                        <div class="p-4 bg-white/50 rounded-xl border border-pink-100" data-lang-key="dvdLtd"></div>
+                    </div>
+                    <div class="pt-4 space-y-4">
+                        <p data-lang-key="bdContent"></p>
+                        <p data-lang-key="bdLimitedContent"></p>
+                        <div class="flex justify-center pt-4">
+                             <a href="https://0m-p.lnk.to/AKISS_BD" target="_blank" class="btn-primary" data-lang-key="bdBuy">Buying</a>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
+                        <div>
+                             <h4 class="font-bold text-xl mb-3" data-lang-key="bdCdTracksTitle">Theme Song CD Track List</h4>
+                             <p class="whitespace-pre-line" data-lang-key="bdCdTracks"></p>
+                        </div>
+                         <div>
+                             <h4 class="font-bold text-xl mb-3" data-lang-key="bdDailySongsTitle">DAILY SONGS</h4>
+                             <p class="whitespace-pre-line" data-lang-key="bdDailySongs"></p>
+                        </div>
+                    </div>
+                    <p class="text-center text-sm pt-4" data-lang-key="bdNote"></p>
+                </div>
+            </section>
+            
+            <!-- Section 5 & 6: Promotions -->
+            <section id="promotion" class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="card text-center">
+                    <h3 class="section-title text-2xl md:text-4xl mb-6" data-lang-key="tourTitle">0M_P WORLD TOUR 2026<br>"HERE,LIGHT"</h3>
+                    <p class="mb-6" data-lang-key="tourDesc"></p>
+                    <a href="https://tour.0m-p.space/2026" target="_blank" class="btn-primary" data-lang-key="officialSite">Official Site</a>
+                </div>
+                <div class="card text-center">
+                    <img src="https://links.0m-p.space/BNW-LCover.png" alt="Brand New World Cover" class="w-2/3 max-w-xs mx-auto rounded-2xl shadow-lg mb-6">
+                    <h3 class="section-title text-2xl md:text-4xl mb-6" data-lang-key="albumTitle">0M_P 5th Album<br>"Brand New World"</h3>
+                    <p class="mb-6" data-lang-key="albumRelease">2025.9.10 Release</p>
+                    <a href="https://album.0m-p.space/5th" target="_blank" class="btn-primary" data-lang-key="officialSite">Official Site</a>
+                </div>
+            </section>
+
+            <!-- Section 7: About 0M_P -->
+            <section id="about">
+                <h2 class="section-title text-center mb-12" data-lang-key="aboutTitle">About 0M_P</h2>
+                <div class="card md:grid md:grid-cols-3 md:gap-12 items-center">
+                    <img src="https://links.0m-p.space/Avatar.png" alt="0M_P Avatar" class="w-full max-w-xs mx-auto rounded-full shadow-lg mb-8 md:mb-0 md:col-span-1">
+                    <div class="md:col-span-2 space-y-4">
+                        <h3 class="font-bold text-2xl text-pink-600" data-lang-key="aboutName">0M_P</h3>
+                        <p class="font-medium" data-lang-key="aboutRoles"></p>
+                        <p data-lang-key="aboutDesc1"></p>
+                        <p data-lang-key="aboutDesc2"></p>
+                        <p data-lang-key="aboutWorks"></p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 8: Other Info -->
+            <section id="other-info">
+                <h2 class="section-title text-center mb-12" data-lang-key="otherInfoTitle">More Information</h2>
+                <div class="card grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <div>
+                        <h4 class="font-bold text-xl mb-3 text-pink-600" data-lang-key="liveBrandTitle">Concert Brands</h4>
+                        <ul class="list-disc list-inside space-y-2" data-lang-key="liveBrandList"></ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-3 text-pink-600" data-lang-key="albumListTitle">Albums</h4>
+                        <ul class="list-disc list-inside space-y-2" data-lang-key="albumList"></ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+            <a href="https://www.universal-music.co.jp/" target="_blank">
+                <img src="https://www.universalmusic.com/wp-content/themes/umgcore2/assets/img/logo.png" alt="Universal Music Group Logo" class="h-10 mx-auto">
+            </a>
+            <div class="text-xs text-gray-400 space-y-1">
+                <p>Main Visual & Art Directed by SanKyu</p>
+                <p>Web Designed by Cold STUDIO / Design Director : White / Concept Artist : 0M_P</p>
+                <p>"RUNNING, KISSING" ℗ 2023 (1-6), 2025 (7) UNIVERSAL MUSIC LLC / 0M_P</p>
+                <p>© 2023 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- KV Modal -->
+    <div id="kv-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-[100] hidden transition-opacity duration-300">
+        <div class="relative">
+            <img src="https://live.0m-p.space/AKISS/AKISS-KV.png" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
+            <p class="absolute bottom-4 left-4 text-white text-sm font-light opacity-75">Art by SanKyu</p>
+        </div>
+        <button id="modal-close" class="absolute top-4 right-6 text-white text-5xl font-light hover:text-pink-300 transition-colors">&times;</button>
+    </div>
+
+    <script>
+        // --- DATA STORE ---
+        const translations = {
+            en: {
+                officialSite: "OFFICIAL SITE",
+                scheduleTitle: "LIVE SCHEDULE",
+                tokyo1: `<strong>TOKYO</strong><br>2023.3.4-5<br>Zepp DiverCity(TOKYO)`,
+                osaka: `<strong>OSAKA</strong><br>2023.3.11<br>Zepp Osaka Bayside`,
+                shanghai: `<strong>SHANGHAI</strong><br>2023.3.18-19<br>Shanghai World Expo Exhibition & Convention Center - Silver Hall`,
+                hongkong: `<strong>HONG KONG</strong><br>2023.3.25<br>Queen Elizabeth Stadium`,
+                tokyo2: `<strong>TOKYO (Additional)</strong><br>2023.8.30<br>NIPPON BUDOKAN`,
+                setlistTitle: "SETLIST",
+                epTitle: "SPECIAL EP",
+                epName: `0M_P 2nd ONE-MAN LIVE "A KISS" SPECIAL EP "RUNNING, KISSING"`,
+                epNumber: "Cat-No. UM0M-E001",
+                epArt: "Art by SanKyu-Illustrator",
+                epRelease: "2023.2.22 Release",
+                epRerelease: "2025.11.5 Re-release",
+                epPrice: "9.9 USD (in Tax)",
+                epSite: "Special Site",
+                epListen: "Listen / Download",
+                epBuyRe: "Buying (Re-released)",
+                tracklist: "Track List",
+                epTracks: `01 A Kiss for Your Melody
+02 A Kiss for Your Melody -Chinese Ver.-
+03 Kono Uta wa, Watashitachi dake ni Kikoeru
+04 Past and Now
+05 Zǎoshang hǎo -Chinese Ver.-
+06 A Kiss for Your Melody -Instrumental-
+07 A Kiss for Your Melody -Giga Connecting Remix- (Added in Re-released Version)`,
+                bdTitle: "Blu-ray & DVD",
+                bdRelease: "2023.10.19 Release",
+                bdStd: `<strong>Blu-ray Standard Edition</strong><br>49.9 USD (in Tax)`,
+                bdLtd: `<strong>Blu-ray Limited Edition</strong><br>69.9 USD (in Tax)`,
+                dvdLtd: `<strong>DVD Limited Edition</strong><br>59.9 USD (in Tax)`,
+                bdContent: "Includes the complete performance video of the Shanghai concert (DAY 2 NIGHT) and the Nippon Budokan concert.",
+                bdLimitedContent: "Limited editions include a theme song CD, LIVE&MAKING footage, theme song music video, and DAILY SONGS from the Hong Kong and Osaka concerts.",
+                bdBuy: "Buying",
+                bdCdTracksTitle: "Theme Song CD Track List",
+                bdCdTracks: `01 A Kiss for Your Melody
+02 A Kiss for Your Melody -Chinese Ver.-
+03 A Kiss for Your Melody -Instrumental-`,
+                bdDailySongsTitle: "DAILY SONGS",
+                bdDailySongs: `Utopia -Japanese Ver.-
+Don't be lonely anymore -Cantonese Ver.-
+Utopia -Cantonese Ver.-
+As long as the memories remain, even if things change -Cantonese Ver.-`,
+                bdNote: "※LIVE, DAILY SONGS, Theme Song MV, and LIVE&MAKING support 5.1ch audio and subtitles in Chinese (S/T), English, and Japanese.",
+                tourTitle: `0M_P WORLD TOUR 2026<br>"HERE,LIGHT"`,
+                tourDesc: "Scheduled for Feb-Jul 2026, covering Asia, Americas, Europe, and Australia, expecting to mobilize 400,000 people. Includes a 2-day concert at Tokyo Dome, expecting 100,000 attendees.",
+                albumTitle: `0M_P 5th Album<br>"Brand New World"`,
+                albumRelease: "2025.9.10 Release",
+                aboutTitle: "About 0M_P",
+                aboutName: "0M_P",
+                aboutRoles: "Sound Producer / Singer / VOCALOID Producer / Writer",
+                aboutDesc1: "Started activities in 2017. VOCALOID songs are mainly sung by Hatsune Miku.",
+                aboutDesc2: "Major debut in 2022 from Polydor Records under Universal Music. Currently affiliated with Universal Music Japan.",
+                aboutWorks: `Works include "You Need", "natural love", "Drama of Play".`,
+                otherInfoTitle: "More Information",
+                liveBrandTitle: "Concert Brands",
+                liveBrandList: `<li><a href="https://vlive.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
+                                 <li><a href="https://tour.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
+                                 <li><a href="https://tour.0m-p.space/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "Today's Matters"</a></li>`,
+                albumListTitle: "Albums",
+                albumList: `<li><a href="https://album.0m-p.space/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.0m-p.space/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 Release)</a></li>`
+            },
+            zh: {
+                officialSite: "官方网站",
+                scheduleTitle: "演出日程",
+                tokyo1: `<strong>东京</strong><br>2023.3.4-5<br>Zepp DiverCity(TOKYO)`,
+                osaka: `<strong>大阪</strong><br>2023.3.11<br>Zepp Osaka Bayside`,
+                shanghai: `<strong>上海</strong><br>2023.3.18-19<br>上海世博中心银厅`,
+                hongkong: `<strong>香港</strong><br>2023.3.25<br>香港伊丽莎白体育馆`,
+                tokyo2: `<strong>东京 追加演出</strong><br>2023.8.30<br>日本武道馆`,
+                setlistTitle: "演出歌单",
+                epTitle: "特别EP",
+                epName: `0M_P 2nd ONE-MAN LIVE "A KISS" 特别EP "RUNNING, KISSING"`,
+                epNumber: "规格品番 UM0M-E001",
+                epArt: "Art by SanKyu-Illustrator",
+                epRelease: "2023.2.22 发行",
+                epRerelease: "2025.11.5 再版发行",
+                epPrice: "69元",
+                epSite: "特设网站",
+                epListen: "收听/下载",
+                epBuyRe: "购买 (再版)",
+                tracklist: "曲目列表",
+                epTracks: `01 A Kiss for Your Melody
+02 A Kiss for Your Melody -Chinese Ver.-
+03 この歌は、私たちだけに聴こえる
+04 Past and Now
+05 早上好 -Chinese Ver.-
+06 A Kiss for Your Melody -Instrumental-
+07 A Kiss for Your Melody -Giga Connecting Remix- (再版新增内容)`,
+                bdTitle: "Blu-ray & DVD",
+                bdRelease: "2023.10.19 发行",
+                bdStd: `<strong>Blu-ray 通常盘</strong><br>299元`,
+                bdLtd: `<strong>Blu-ray 限定盘</strong><br>399元`,
+                dvdLtd: `<strong>DVD 限定盘</strong><br>339元`,
+                bdContent: "收录了上海公演（DAY 2 NIGHT）与日本武道馆公演的完整演出视频。",
+                bdLimitedContent: "限定版包含了主题曲CD以及LIVE&MAKING、主题曲MV视频以及香港、大阪公演的DAILY SONGS。",
+                bdBuy: "购买",
+                bdCdTracksTitle: "主题曲CD曲目列表",
+                bdCdTracks: `01 A Kiss for Your Melody
+02 A Kiss for Your Melody -Chinese Ver.-
+03 A Kiss for Your Melody -Instrumental-`,
+                bdDailySongsTitle: "DAILY SONGS",
+                bdDailySongs: `Utopia -Japanese Ver.-
+不要再孤独了 -Cantonese Ver.-
+乌托邦 -Cantonese Ver.-
+就算物是人非，回忆还在就好 -Cantonese Ver.-`,
+                bdNote: "※LIVE、DAILY SONGS、主题曲MV、LIVE&MAKING支持5.1ch声道及简/繁中文、英文、日文字幕。",
+                tourTitle: `0M_P WORLD TOUR 2026<br>"HERE,LIGHT"`,
+                tourDesc: "2026年2-7月举办，覆盖亚洲、美洲、欧洲、澳洲等地区，预计动员40万人。包含2天2场的东京巨蛋演唱会，预计动员10万人。",
+                albumTitle: `0M_P 5th Album<br>"Brand New World"`,
+                albumRelease: "2025.9.10 发行",
+                aboutTitle: "关于 0M_P",
+                aboutName: "0M_P",
+                aboutRoles: "音乐制作人 / 歌手 / VOCALOID P / 作家",
+                aboutDesc1: "2017年开始活动，VOCALOID歌曲主要由初音未来演唱。",
+                aboutDesc2: "2022年从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐旗下。",
+                aboutWorks: `作品有"You Need" "natural love" "Drama of Play"`,
+                otherInfoTitle: "更多信息",
+                liveBrandTitle: "演唱会品牌",
+                liveBrandList: `<li><a href="https://vlive.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
+                                 <li><a href="https://tour.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
+                                 <li><a href="https://tour.0m-p.space/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "今天的事情"</a></li>`,
+                albumListTitle: "专辑",
+                albumList: `<li><a href="https://album.0m-p.space/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.0m-p.space/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 发行)</a></li>`
+            },
+            ja: {
+                officialSite: "オフィシャルサイト",
+                scheduleTitle: "ライブスケジュール",
+                tokyo1: `<strong>東京</strong><br>2023.3.4-5<br>Zepp DiverCity(TOKYO)`,
+                osaka: `<strong>大阪</strong><br>2023.3.11<br>Zepp Osaka Bayside`,
+                shanghai: `<strong>上海</strong><br>2023.3.18-19<br>上海世博センター 銀庁`,
+                hongkong: `<strong>香港</strong><br>2023.3.25<br>クイーン・エリザベス・スタジアム`,
+                tokyo2: `<strong>東京 追加公演</strong><br>2023.8.30<br>日本武道館`,
+                setlistTitle: "セットリスト",
+                epTitle: "SPECIAL EP",
+                epName: `0M_P 2nd ONE-MAN LIVE "A KISS" SPECIAL EP "RUNNING, KISSING"`,
+                epNumber: "規格品番 UM0M-E001",
+                epArt: "Art by SanKyu-Illustrator",
+                epRelease: "2023.2.22 リリース",
+                epRerelease: "2025.11.5 再リリース",
+                epPrice: "1339円 (in Tax)",
+                epSite: "特設サイト",
+                epListen: "配信/ダウンロード",
+                epBuyRe: "購入 (再販盤)",
+                tracklist: "トラックリスト",
+                epTracks: `01 A Kiss for Your Melody
+02 A Kiss for Your Melody -Chinese Ver.-
+03 この歌は、私たちだけに聴こえる
+04 Past and Now
+05 早上好 -Chinese Ver.-
+06 A Kiss for Your Melody -Instrumental-
+07 A Kiss for Your Melody -Giga Connecting Remix- (再販盤 新規収録)`,
+                bdTitle: "Blu-ray & DVD",
+                bdRelease: "2023.10.19 リリース",
+                bdStd: `<strong>Blu-ray 通常盤</strong><br>6399円 (in Tax)`,
+                bdLtd: `<strong>Blu-ray 限定盤</strong><br>9999円 (in Tax)`,
+                dvdLtd: `<strong>DVD 限定盤</strong><br>8999円 (in Tax)`,
+                bdContent: "上海公演（DAY 2 NIGHT）と日本武道館公演の完全版ライブ映像を収録。",
+                bdLimitedContent: "限定版には、テーマソングCD、LIVE&MAKING、テーマソングMV、そして香港・大阪公演のDAILY SONGSを収録。",
+                bdBuy: "購入",
+                bdCdTracksTitle: "テーマソングCD トラックリスト",
+                bdCdTracks: `01 A Kiss for Your Melody
+02 A Kiss for Your Melody -Chinese Ver.-
+03 A Kiss for Your Melody -Instrumental-`,
+                bdDailySongsTitle: "DAILY SONGS",
+                bdDailySongs: `Utopia -Japanese Ver.-
+不要再孤独了 -Cantonese Ver.-
+乌托邦 -Cantonese Ver.-
+就算物是人非，回忆还在就好 -Cantonese Ver.-`,
+                bdNote: "※LIVE・DAILY SONGS・テーマソングMV・LIVE&MAKINGのみ5.1ch・中国語(簡/繁)・英語・日本語字幕対応。",
+                tourTitle: `0M_P WORLD TOUR 2026<br>"HERE,LIGHT"`,
+                tourDesc: "2026年2月～7月開催、アジア、アメリカ、ヨーロッパ、オーストラリアなどをカバーし、40万人を動員予定。東京ドームでの2日間2公演を含み、10万人を動員予定。",
+                albumTitle: `0M_P 5th Album<br>"Brand New World"`,
+                albumRelease: "2025.9.10 リリース",
+                aboutTitle: "0M_Pについて",
+                aboutName: "0M_P",
+                aboutRoles: "サウンドプロデューサー / シンガー / VOCALOIDプロデューサー / ライター",
+                aboutDesc1: "2017年から活動開始。VOCALOID楽曲は主に初音ミクが歌唱。",
+                aboutDesc2: "2022年、ユニバーサルミュージック傘下のPolydor Recordsからメジャーデビュー。現在、ユニバーサルミュージックジャパンに所属。",
+                aboutWorks: `代表作に"You Need" "natural love" "Drama of Play"など。`,
+                otherInfoTitle: "その他の情報",
+                liveBrandTitle: "コンサートブランド",
+                liveBrandList: `<li><a href="https://vlive.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
+                                 <li><a href="https://tour.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
+                                 <li><a href="https://tour.0m-p.space/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "今日の事"</a></li>`,
+                albumListTitle: "アルバム",
+                albumList: `<li><a href="https://album.0m-p.space/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.0m-p.space/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 リリース)</a></li>`
+            }
+        };
+
+        const setlists = {
+            tokyo1: {
+                name: {
+                    en: "TOKYO 2023.3.4-5 Zepp DiverCity(TOKYO)",
+                    zh: "东京 2023.3.4-5 Zepp DiverCity(TOKYO)",
+                    ja: "TOKYO 2023.3.4-5 Zepp DiverCity(TOKYO)"
+                },
+                songs: `01 You Need -Japanese Ver.-
+02 No Title III -Japanese Ver.-
+03 Past and Now
+-MC-
+04 这是一首写给回忆的摇滚 -Japanese Ver.-
+05 Stone
+06 No Title II
+07 あなたの笑顔
+08 Check it Out
+09 この歌は、私たちだけに聴こえる
+10 Tears Rolling Down
+-Band Members Introduction-
+11 おはよー
+12 Blue, and Us
+13 You Remember…
+14 不要再孤独了 -Japanese Ver.-
+15 就在那时候 -Japanese Ver.-
+16 Answer Me Now
+
+-Encore-
+17 愛言葉III (Cover) [feat. 初音ミク]
+18 Sing Again (feat. 初音ミク)
+19 ルーキーのソング
+20 A Kiss for Your Melody`
+            },
+            osaka: {
+                name: {
+                    en: "OSAKA 2023.3.11 Zepp Osaka Bayside",
+                    zh: "大阪 2023.3.11 Zepp Osaka Bayside",
+                    ja: "OSAKA 2023.3.11 Zepp Osaka Bayside"
+                },
+                songs: `01 You Need -Japanese Ver.-
+02 No Title III -Japanese Ver.-
+03 Past and Now
+-MC-
+04 这是一首写给回忆的摇滚 -Japanese Ver.-
+05 Stone
+06 No Title II
+07 あなたの笑顔
+08 Check it Out
+09 この歌は、私たちだけに聴こえる
+10 Tears Rolling Down
+-Band Members Introduction-
+11 おはよー
+12 Blue, and Us
+13 You Remember…
+14 不要再孤独了 -Japanese Ver.-
+15 Utopia -Japanese Ver.-
+16 Answer Me Now
+
+-Encore-
+17 愛言葉III (Cover)
+18 Sing Again
+19 ルーキーのソング
+20 A Kiss for Your Melody`
+            },
+            shanghai: {
+                name: {
+                    en: "SHANGHAI 2023.3.18-19 Shanghai World Expo Exhibition & Convention Center - Silver Hall",
+                    zh: "上海 2023.3.18-19 上海世博中心银厅",
+                    ja: "SHANGHAI 2023.3.18-19 上海世博センター 銀庁"
+                },
+                songs: `01 You Need
+02 No Title III
+03 Past and Now -Chinese Ver.-
+-MC-
+04 这是一首写给回忆的摇滚
+05 高喊着回忆
+06 No Title II
+07 あなたの笑顔
+08 Check it Out
+09 この歌は、私たちだけに聴こえる
+10 这个与你在一起的夜晚
+-Band Members Introduction-
+11 早上好 -Chinese Ver.-
+12 Blue, and Us
+13 You Remember…
+14 不要再孤独了
+15 乌托邦
+16 就算物是人非，回忆还在就好
+
+-Encore-
+17 愛言葉III (Cover)
+18 Sing Again -Chinese Ver.-
+19 ルーキーのソング -Chinese Ver.-
+20 A Kiss for Your Melody -Chinese Ver.-`
+            },
+            hongkong: {
+                name: {
+                    en: "HONG KONG 2023.3.25 Queen Elizabeth Stadium",
+                    zh: "香港 2023.3.25 香港伊丽莎白体育馆",
+                    ja: "HONG KONG 2023.3.25 クイーン・エリザベス・スタジアム"
+                },
+                songs: `01 You Need
+02 No Title III
+03 Past and Now -Chinese Ver.-
+-MC-
+04 这是一首写给回忆的摇滚
+05 高喊着回忆
+06 No Title II
+07 あなたの笑顔
+08 Check it Out
+09 この歌は、私たちだけに聴こえる
+10 这个与你在一起的夜晚
+-Band Members Introduction-
+11 早上好 -Chinese Ver.-
+12 Blue, and Us
+13 就在那时候
+14 不要再孤独了 -Cantonese Ver.-
+15 乌托邦 -Cantonese Ver.-
+16 就算物是人非，回忆还在就好 -Cantonese Ver.-
+
+-Encore-
+17 愛言葉III (Cover)
+18 Sing Again -Chinese Ver.-
+19 ルーキーのソング -Chinese Ver.-
+20 A Kiss for Your Melody -Chinese Ver.-`
+            },
+            tokyo2: {
+                name: {
+                    en: "TOKYO (Additional) 2023.8.30 NIPPON BUDOKAN",
+                    zh: "东京 追加演出 2023.8.30 日本武道馆",
+                    ja: "TOKYO 追加公演 2023.8.30 日本武道館"
+                },
+                songs: `01 You Need -Japanese Ver.-
+02 No Title III -Japanese Ver.-
+03 げんきがでるきょく
+-MC-
+04 这是一首写给回忆的摇滚 -Japanese Ver.-
+05 Stone
+06 No Title II
+07 あなたの笑顔
+08 Check it Out
+09 この歌は、私たちだけに聴こえる
+10 Tears Rolling Down
+-Band Members Introduction-
+11 おはよー
+12 Blue, and Us
+13 You Remember…
+14 不要再孤独了 -Japanese Ver.-
+15 就在那时候 -Japanese Ver.-
+16 Answer Me Now -Piano Ver.-
+17 もう泣かない
+18 Past and Now
+
+-Encore-
+19 愛言葉III (Cover) [feat. 初音ミク]
+20 Sing Again (feat. 初音ミク)
+21 Clear Sky
+22 ルーキーのソング
+23 A Kiss for Your Melody`
+            }
+        };
+
+        let currentLang = 'ja';
+
+        // --- FUNCTIONS ---
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            // Update all elements with data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Update language button styles
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('bg-pink-500', 'text-white');
+                    btn.classList.remove('text-gray-700');
+                } else {
+                    btn.classList.remove('bg-pink-500', 'text-white');
+                    btn.classList.add('text-gray-700');
+                }
+            });
+
+            // Update setlist dropdown options
+            updateSetlistSelector();
+            // Refresh currently displayed setlist
+            const selector = document.getElementById('setlist-selector');
+            changeSetlist(selector.value);
+        }
+
+        function changeSetlist(venueKey) {
+            const setlist = setlists[venueKey];
+            if (!setlist) return;
+            
+            const display = document.getElementById('setlist-display');
+            // Format the song list with line breaks
+            display.innerHTML = setlist.songs.replace(/\n/g, '<br>');
+        }
+        
+        function updateSetlistSelector() {
+            const selector = document.getElementById('setlist-selector');
+            const currentVenue = selector.value;
+            selector.innerHTML = ''; // Clear existing options
+            
+            Object.keys(setlists).forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = setlists[key].name[currentLang];
+                selector.appendChild(option);
+            });
+            
+            // Restore previously selected value if it exists
+            selector.value = currentVenue || 'tokyo1';
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Language and Setlist functionality
+            updateSetlistSelector();
+            changeLanguage('ja');
+            const selector = document.getElementById('setlist-selector');
+            selector.value = 'tokyo1';
+            changeSetlist('tokyo1');
+            selector.addEventListener('change', (e) => {
+                changeSetlist(e.target.value);
+            });
+
+            // KV Modal functionality
+            const header = document.getElementById('main-header');
+            const modal = document.getElementById('kv-modal');
+            const closeModalBtn = document.getElementById('modal-close');
+
+            header.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            modal.addEventListener('click', (e) => {
+                // Close modal if the click is on the background itself, not the image
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
