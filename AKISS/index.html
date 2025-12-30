@@ -33,7 +33,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background-image: url('https://live.0m-p.space/AKISS/AKISS-KV.png');
+            background-image: url('https://live.btm-m.site/AKISS/AKISS-KV.png');
             background-size: cover;
             background-position: center;
             filter: blur(4px);
@@ -80,16 +80,6 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 40px 0 rgba(214, 51, 132, 0.15);
         }
-        .custom-select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23D63384' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
         .lang-menu {
             background-color: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(12px);
@@ -110,6 +100,15 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
         }
+        
+        /* Custom Dropdown Styles */
+        .setlist-options {
+            transform-origin: top;
+            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+        }
+        .dropdown-chevron.open {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -126,7 +125,7 @@
     <!-- Header: Main Visual -->
     <header id="main-header" class="h-screen min-h-[600px] main-visual flex flex-col items-center justify-center text-center text-white p-4">
         <div class="header-content flex flex-col items-center">
-            <img src="https://live.0m-p.space/AKISS/AKISS-Logo.png" alt="A KISS Logo" class="logo w-4/5 max-w-2xl mb-4">
+            <img src="https://live.btm-m.site/AKISS/AKISS-Logo.png" alt="A KISS Logo" class="logo w-4/5 max-w-2xl mb-4">
             <h1 class="text-2xl md:text-3xl font-light tracking-widest mt-4" data-lang-key="officialSite">OFFICIAL SITE</h1>
         </div>
     </header>
@@ -152,9 +151,18 @@
                 <div class="max-w-3xl mx-auto">
                     <div class="card">
                         <div class="mb-6">
-                            <select id="setlist-selector" class="w-full p-4 bg-white/50 border border-pink-200 rounded-2xl focus:ring-2 focus:ring-pink-400 focus:outline-none custom-select text-lg">
-                                <!-- Options will be populated by JS -->
-                            </select>
+                            <!-- Custom Setlist Dropdown -->
+                            <div class="relative" id="custom-setlist-dropdown">
+                                <button id="setlist-button" class="w-full flex items-center justify-between p-4 bg-white/50 border border-pink-200 rounded-2xl focus:ring-2 focus:ring-pink-400 focus:outline-none text-lg text-left">
+                                    <span id="selected-setlist-name" class="truncate"></span>
+                                    <svg class="w-6 h-6 text-pink-500 transition-transform duration-300 dropdown-chevron flex-shrink-0 ml-2" id="dropdown-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </button>
+                                <div id="setlist-options" class="absolute w-full mt-2 bg-white/95 backdrop-blur-md border border-pink-100 rounded-2xl shadow-xl z-20 hidden setlist-options overflow-hidden">
+                                    <!-- Options will be populated by JS -->
+                                </div>
+                            </div>
                         </div>
                         <div id="setlist-display" class="space-y-3 text-lg leading-relaxed">
                             <!-- Setlist will be populated by JS -->
@@ -168,7 +176,7 @@
                  <h2 class="section-title text-center mb-12" data-lang-key="epTitle">SPECIAL EP</h2>
                  <div class="card md:grid md:grid-cols-2 md:gap-12 items-center">
                      <div>
-                        <img src="https://live.0m-p.space/AKISS/RK-Cover.png" alt="RUNNING, KISSING Cover" class="w-full max-w-md mx-auto rounded-2xl shadow-lg mb-2 md:mb-0">
+                        <img src="https://live.btm-m.site/AKISS/RK-Cover.png" alt="RUNNING, KISSING Cover" class="w-full max-w-md mx-auto rounded-2xl shadow-lg mb-2 md:mb-0">
                         <p class="text-center text-sm mt-2 text-gray-500">Art by SanKyu</p>
                      </div>
                      <div class="space-y-4 mt-8 md:mt-0">
@@ -179,7 +187,7 @@
                         <p data-lang-key="epRerelease">2025.11.5 Re-release</p>
                         <p class="font-bold text-xl" data-lang-key="epPrice"></p>
                         <div class="flex flex-wrap gap-4 pt-4">
-                            <a href="https://album.0m-p.space/RK" target="_blank" class="btn-primary" data-lang-key="epSite">Special Site</a>
+                            <a href="https://album.btm-m.site/RK" target="_blank" class="btn-primary" data-lang-key="epSite">Special Site</a>
                             <a href="https://0m-p.lnk.to/RK" target="_blank" class="btn-primary" data-lang-key="epListen">Listen / Download</a>
                             <a href="https://0m-p.lnk.to/RK_ReV" target="_blank" class="btn-primary" data-lang-key="epBuyRe">Buying (Re-released)</a>
                         </div>
@@ -227,13 +235,13 @@
                 <div class="card text-center">
                     <h3 class="section-title text-2xl md:text-4xl mb-6" data-lang-key="tourTitle">0M_P WORLD TOUR 2026<br>"HERE,LIGHT"</h3>
                     <p class="mb-6" data-lang-key="tourDesc"></p>
-                    <a href="https://tour.0m-p.space/2026" target="_blank" class="btn-primary" data-lang-key="officialSite">Official Site</a>
+                    <a href="https://tour.btm-m.site/2026" target="_blank" class="btn-primary" data-lang-key="officialSite">Official Site</a>
                 </div>
                 <div class="card text-center">
-                    <img src="https://links.0m-p.space/BNW-LCover.png" alt="Brand New World Cover" class="w-2/3 max-w-xs mx-auto rounded-2xl shadow-lg mb-6">
+                    <img src="https://links.btm-m.site/BNW-LCover.png" alt="Brand New World Cover" class="w-2/3 max-w-xs mx-auto rounded-2xl shadow-lg mb-6">
                     <h3 class="section-title text-2xl md:text-4xl mb-6" data-lang-key="albumTitle">0M_P 5th Album<br>"Brand New World"</h3>
                     <p class="mb-6" data-lang-key="albumRelease">2025.9.10 Release</p>
-                    <a href="https://album.0m-p.space/5th" target="_blank" class="btn-primary" data-lang-key="officialSite">Official Site</a>
+                    <a href="https://album.btm-m.site/5th" target="_blank" class="btn-primary" data-lang-key="officialSite">Official Site</a>
                 </div>
             </section>
 
@@ -241,7 +249,7 @@
             <section id="about">
                 <h2 class="section-title text-center mb-12" data-lang-key="aboutTitle">About 0M_P</h2>
                 <div class="card md:grid md:grid-cols-3 md:gap-12 items-center">
-                    <img src="https://links.0m-p.space/Avatar.png" alt="0M_P Avatar" class="w-full max-w-xs mx-auto rounded-full shadow-lg mb-8 md:mb-0 md:col-span-1">
+                    <img src="https://links.btm-m.site/Avatar.png" alt="0M_P Avatar" class="w-full max-w-xs mx-auto rounded-full shadow-lg mb-8 md:mb-0 md:col-span-1">
                     <div class="md:col-span-2 space-y-4">
                         <h3 class="font-bold text-2xl text-pink-600" data-lang-key="aboutName">0M_P</h3>
                         <p class="font-medium" data-lang-key="aboutRoles"></p>
@@ -288,7 +296,7 @@
     <!-- KV Modal -->
     <div id="kv-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-[100] hidden transition-opacity duration-300">
         <div class="relative">
-            <img src="https://live.0m-p.space/AKISS/AKISS-KV.png" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
+            <img src="https://live.btm-m.site/AKISS/AKISS-KV.png" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
             <p class="absolute bottom-4 left-4 text-white text-sm font-light opacity-75">Art by SanKyu</p>
         </div>
         <button id="modal-close" class="absolute top-4 right-6 text-white text-5xl font-light hover:text-pink-300 transition-colors">&times;</button>
@@ -354,12 +362,12 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
                 aboutWorks: `Works include "You Need", "natural love", "Drama of Play".`,
                 otherInfoTitle: "More Information",
                 liveBrandTitle: "Concert Brands",
-                liveBrandList: `<li><a href="https://vlive.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
-                                 <li><a href="https://tour.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
-                                 <li><a href="https://tour.0m-p.space/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "Today's Matters"</a></li>`,
+                liveBrandList: `<li><a href="https://vlive.btm-m.site" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
+                                 <li><a href="https://tour.btm-m.site" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
+                                 <li><a href="https://tour.btm-m.site/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "Today's Matters"</a></li>`,
                 albumListTitle: "Albums",
-                albumList: `<li><a href="https://album.0m-p.space/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
-                            <li><a href="https://album.0m-p.space/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 Release)</a></li>`
+                albumList: `<li><a href="https://album.btm-m.site/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.btm-m.site/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 Release)</a></li>`
             },
             zh: {
                 officialSite: "官方网站",
@@ -418,12 +426,12 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
                 aboutWorks: `作品有"You Need" "natural love" "Drama of Play"`,
                 otherInfoTitle: "更多信息",
                 liveBrandTitle: "演唱会品牌",
-                liveBrandList: `<li><a href="https://vlive.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
-                                 <li><a href="https://tour.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
-                                 <li><a href="https://tour.0m-p.space/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "今天的事情"</a></li>`,
+                liveBrandList: `<li><a href="https://vlive.btm-m.site" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
+                                 <li><a href="https://tour.btm-m.site" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
+                                 <li><a href="https://tour.btm-m.site/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "今天的事情"</a></li>`,
                 albumListTitle: "专辑",
-                albumList: `<li><a href="https://album.0m-p.space/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
-                            <li><a href="https://album.0m-p.space/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 发行)</a></li>`
+                albumList: `<li><a href="https://album.btm-m.site/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.btm-m.site/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 发行)</a></li>`
             },
             ja: {
                 officialSite: "オフィシャルサイト",
@@ -482,12 +490,12 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
                 aboutWorks: `代表作に"You Need" "natural love" "Drama of Play"など。`,
                 otherInfoTitle: "その他の情報",
                 liveBrandTitle: "コンサートブランド",
-                liveBrandList: `<li><a href="https://vlive.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
-                                 <li><a href="https://tour.0m-p.space" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
-                                 <li><a href="https://tour.0m-p.space/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "今日の事"</a></li>`,
+                liveBrandList: `<li><a href="https://vlive.btm-m.site" class="hover:text-pink-500" target="_blank">0M_P Virtual Live "On-Site"</a></li>
+                                 <li><a href="https://tour.btm-m.site" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR</a></li>
+                                 <li><a href="https://tour.btm-m.site/China/2025" class="hover:text-pink-500" target="_blank">0M_P CHINA TOUR 2025 "今日の事"</a></li>`,
                 albumListTitle: "アルバム",
-                albumList: `<li><a href="https://album.0m-p.space/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
-                            <li><a href="https://album.0m-p.space/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 リリース)</a></li>`
+                albumList: `<li><a href="https://album.btm-m.site/4th" class="hover:text-pink-500" target="_blank">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.btm-m.site/tour_25" class="hover:text-pink-500" target="_blank">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM (2025.7.16 リリース)</a></li>`
             }
         };
 
@@ -653,13 +661,13 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
         };
 
         let currentLang = 'ja';
+        let currentVenue = 'tokyo1';
 
         // --- FUNCTIONS ---
         function changeLanguage(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
             
-            // Update all elements with data-lang-key
             document.querySelectorAll('[data-lang-key]').forEach(el => {
                 const key = el.getAttribute('data-lang-key');
                 if (translations[lang][key]) {
@@ -667,7 +675,6 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
                 }
             });
             
-            // Update language button styles
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 if (btn.getAttribute('data-lang') === lang) {
                     btn.classList.add('bg-pink-500', 'text-white');
@@ -678,49 +685,70 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
                 }
             });
 
-            // Update setlist dropdown options
-            updateSetlistSelector();
-            // Refresh currently displayed setlist
-            const selector = document.getElementById('setlist-selector');
-            changeSetlist(selector.value);
+            populateCustomDropdown();
+            updateSelectedSetlistDisplay();
         }
 
         function changeSetlist(venueKey) {
+            currentVenue = venueKey;
             const setlist = setlists[venueKey];
             if (!setlist) return;
             
             const display = document.getElementById('setlist-display');
-            // Format the song list with line breaks
             display.innerHTML = setlist.songs.replace(/\n/g, '<br>');
+            updateSelectedSetlistDisplay();
         }
         
-        function updateSetlistSelector() {
-            const selector = document.getElementById('setlist-selector');
-            const currentVenue = selector.value;
-            selector.innerHTML = ''; // Clear existing options
+        function updateSelectedSetlistDisplay() {
+            const selectedNameEl = document.getElementById('selected-setlist-name');
+            if(setlists[currentVenue]) {
+                selectedNameEl.textContent = setlists[currentVenue].name[currentLang];
+            }
+        }
+
+        function populateCustomDropdown() {
+            const optionsContainer = document.getElementById('setlist-options');
+            optionsContainer.innerHTML = ''; 
             
             Object.keys(setlists).forEach(key => {
-                const option = document.createElement('option');
-                option.value = key;
+                const option = document.createElement('button');
+                option.className = 'w-full text-left px-4 py-3 text-lg hover:bg-pink-100 transition-colors duration-200';
                 option.textContent = setlists[key].name[currentLang];
-                selector.appendChild(option);
+                option.dataset.value = key;
+
+                option.addEventListener('click', () => {
+                    changeSetlist(key);
+                    optionsContainer.classList.add('hidden');
+                    document.getElementById('dropdown-chevron').classList.remove('open');
+                });
+                optionsContainer.appendChild(option);
             });
-            
-            // Restore previously selected value if it exists
-            selector.value = currentVenue || 'tokyo1';
         }
+
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Language and Setlist functionality
-            updateSetlistSelector();
-            changeLanguage('ja');
-            const selector = document.getElementById('setlist-selector');
-            selector.value = 'tokyo1';
-            changeSetlist('tokyo1');
-            selector.addEventListener('change', (e) => {
-                changeSetlist(e.target.value);
+            // Setlist Dropdown
+            const dropdownButton = document.getElementById('setlist-button');
+            const optionsContainer = document.getElementById('setlist-options');
+            const chevron = document.getElementById('dropdown-chevron');
+
+            dropdownButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = optionsContainer.classList.toggle('hidden');
+                chevron.classList.toggle('open', !isHidden);
             });
+
+            document.addEventListener('click', (e) => {
+                if (!dropdownButton.contains(e.target)) {
+                    optionsContainer.classList.add('hidden');
+                    chevron.classList.remove('open');
+                }
+            });
+
+            // Initial Population
+            changeLanguage('ja');
+            changeSetlist('tokyo1');
 
             // KV Modal functionality
             const header = document.getElementById('main-header');
@@ -736,7 +764,6 @@ As long as the memories remain, even if things change -Cantonese Ver.-`,
             });
 
             modal.addEventListener('click', (e) => {
-                // Close modal if the click is on the background itself, not the image
                 if (e.target === modal) {
                     modal.classList.add('hidden');
                 }
