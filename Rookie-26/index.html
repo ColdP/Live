@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P ONE-MAN LIVE 2026 "Rookie [Re : WiND]"</title>
+    
+    <!-- Fonts: Inter & Noto Sans for Global/JP/SC support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&family=Noto+Sans+JP:wght@300;500;700&family=Noto+Sans+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Config for Theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rookie-purple': '#7c3aed',
+                        'rookie-dark': '#050505',
+                        'glass-border': 'rgba(255, 255, 255, 0.1)',
+                        'glass-bg': 'rgba(20, 20, 20, 0.6)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'Noto Sans SC', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- App Logic (Moved to Head to ensure it's defined before Alpine initializes) -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('appData', () => ({
+                lang: 'en', // Default Language
+                
+                // Tracklist Data
+                tracks: [
+                    { title: "おはよー", ja_trans: null },
+                    { title: "Utopia -English Ver.-", ja_trans: null },
+                    { title: "这是一首写给回忆的摇滚 -Japanese Ver.-", ja_trans: "思い出へのロック" },
+                    { title: "不要再孤独了 -Japanese Ver.-", ja_trans: "もう独りぼっちじゃない" },
+                    { title: "就在那时候 -English Ver.-", ja_trans: "その時、まさに" },
+                    { title: "No Title III -Japanese Ver.-", ja_trans: null },
+                    { title: "愛言葉III (Cover)", ja_trans: null },
+                    { title: "You Need -Japanese Ver.-", ja_trans: null },
+                    { title: "ルーキーのソング", ja_trans: null },
+                    { title: "ルーキーのソング -TAKU INOUE Reviewing Remix-", ja_trans: null, note: "(Re-released Version New Content)" }
+                ],
+
+                // Schedule Data
+                schedule: [
+                    { date: "10.31 - 11.1", city: "Yokohama", cityKey: "yokohama", venue: "K-Arena Yokohama", venueKey: "k_arena" },
+                    { date: "11.7 - 11.8", city: "Osaka", cityKey: "osaka", venue: "Osaka-Jo Hall", venueKey: "osaka_jo" },
+                    { date: "11.14 - 11.15", city: "Shanghai", cityKey: "shanghai", venue: "Mercedes-Benz Arena", venueKey: "mb_arena" },
+                    { date: "11.21 - 11.22", city: "Changsha", cityKey: "changsha", venue: "Helong Sports Culture Center", venueKey: "helong" }
+                ],
+
+                // Translations Dictionary
+                t: {
+                    en: {
+                        officialSite: "Official Site",
+                        cities: { yokohama: "Yokohama", osaka: "Osaka", shanghai: "Shanghai", changsha: "Changsha" },
+                        venues: { k_arena: "K-Arena Yokohama", osaka_jo: "Osaka-Jo Hall", mb_arena: "Mercedes-Benz Arena", helong: "Helong Sports Culture Center" },
+                        tourDesc: "February - July 2027. Covering Asia, Americas, Europe, Australia. Expected mobilization: 400,000.",
+                        bestAlbumDesc: "Includes 39 most representative songs since 0M_P's debut, including 'You Need', 'natural love', 'Sing Again', etc.",
+                        bio: "Active since 2017. VOCALOID songs mainly performed by Hatsune Miku. Major debut from Polydor Records (UMG) in 2022. Works include 'You Need', 'natural love', 'Drama of Play'.",
+                        price: { std: "13.9 USD (in Tax)", ltd: "16.9 USD (in Tax)" }
+                    },
+                    zh: {
+                        officialSite: "官方网站",
+                        cities: { yokohama: "横滨", osaka: "大阪", shanghai: "上海", changsha: "长沙" },
+                        venues: { k_arena: "K-Arena 横滨", osaka_jo: "大阪城Hall", mb_arena: "梅赛德斯-奔驰文化中心", helong: "贺龙体育文化中心" },
+                        tourDesc: "2027年2月-7月举办。覆盖亚洲、美洲、欧洲、澳洲等地区。预计动员40万人。",
+                        bestAlbumDesc: "收录了0M_P出道以来最有代表性的39首歌曲，包括《You Need》, 《natural love》, 《Sing Again》等。",
+                        bio: "2017开始活动，VOCALOID歌曲主要由初音未来演唱。2022从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐旗下。代表作《You Need》《natural love》《Drama of Play》。",
+                        price: { std: "89元", ltd: "119元" }
+                    },
+                    ja: {
+                        officialSite: "公式サイト",
+                        cities: { yokohama: "横浜", osaka: "大阪", shanghai: "上海", changsha: "長沙" },
+                        venues: { k_arena: "Kアリーナ横浜", osaka_jo: "大阪城ホール", mb_arena: "メルセデス・ベンツアリーナ", helong: "賀竜体育文化中心" },
+                        tourDesc: "2027年2月〜7月開催。アジア、アメリカ、ヨーロッパ、オセアニア等を巡る。動員予定40万人。",
+                        bestAlbumDesc: "「You Need」「natural love」「Sing Again」など、0M_Pデビュー以来の代表曲39曲を収録。",
+                        bio: "2017年活動開始。VOCALOID楽曲は主に初音ミクが歌唱。2022年ユニバーサルミュージック傘下のPolydor Recordsよりメジャーデビュー。代表作に「You Need」「natural love」「Drama of Play」など。",
+                        price: { std: "1939円 (税込)", ltd: "2399円 (税込)" }
+                    }
+                },
+
+                // Helper: Get Price based on Lang
+                getPrice(type) {
+                    if (type === 'standard') return this.t[this.lang].price.std;
+                    return this.t[this.lang].price.ltd;
+                },
+
+                // Helper: Format Track Number
+                formatTrackNum(num) {
+                    return num.toString().padStart(2, '0');
+                },
+
+                // Helper: Track Title Logic
+                getTrackTitle(track) {
+                    // Check if it's a Chinese title song (simulated by having a ja_trans property)
+                    if (track.ja_trans) {
+                        if (this.lang === 'ja') {
+                            return `<span class="font-bold">${track.ja_trans}</span> <span class="text-sm opacity-60">(${track.title})</span>`;
+                        }
+                    }
+                    return track.title;
+                }
+            }));
+        });
+    </script>
+    
+    <!-- Alpine.js (Must be loaded after script logic or deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        /* Apple-style Smooth Scrolling & Base Styles */
+        body {
+            background-color: #000;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed;
+        }
+
+        /* Frosted Glass Utility */
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Glow Effects */
+        .purple-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(124,58,237,0.3) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .text-glow {
+             text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeIn 1s ease-out forwards;
+        }
+    </style>
+</head>
+
+<!-- Alpine.js Data Context (Now referencing the data registered in alpine:init) -->
+<body x-data="appData" class="relative overflow-x-hidden">
+
+    <!-- Language Switcher (Floating) -->
+    <nav class="fixed top-6 right-6 z-50">
+        <div class="glass-panel rounded-full p-1 flex space-x-1">
+            <template x-for="langKey in ['en', 'zh', 'ja']">
+                <button 
+                    @click="lang = langKey"
+                    :class="lang === langKey ? 'bg-white text-black font-bold shadow-lg' : 'text-white/60 hover:text-white'"
+                    class="px-4 py-1.5 rounded-full text-xs transition-all duration-300 uppercase tracking-widest"
+                    x-text="langKey">
+                </button>
+            </template>
+        </div>
+    </nav>
+
+    <!-- 1. Main Visual & Header -->
+    <header class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://live.btm-m.site/Rookie-26/kv.png" alt="Main Visual" class="w-full h-full object-cover opacity-80" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/1a1a1a/FFF?text=Main+Visual'">
+            <!-- Overlay Gradients for readability and blending -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col items-center animate-fade-in-up px-4">
+            <!-- LOGO with white shadow -->
+            <img src="https://live.btm-m.site/Rookie-26/logo.svg" 
+                 alt="0M_P ONE-MAN LIVE 2026 Rookie [Re : WiND]" 
+                 class="w-full max-w-3xl mb-8 drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] transform hover:scale-105 transition-transform duration-700 ease-out"
+                 onerror="this.onerror=null;this.parentElement.innerHTML='<h1 class=\'text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-300 to-white drop-shadow-lg\'>ROOKIE</h1><p class=\'text-xl tracking-[0.5em] mt-2\'>[Re : WiND]</p>'">
+            
+            <p class="text-white/80 text-sm md:text-base tracking-[0.2em] font-light uppercase border-t border-white/20 pt-4 mt-4">
+                <span x-text="t[lang].officialSite">OFFICIAL SITE</span>
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <!-- 2. SCHEDULE -->
+    <section class="relative py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="purple-glow top-0 left-0"></div>
+        
+        <h2 class="text-3xl md:text-5xl font-bold mb-12 tracking-tighter text-center">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">SCHEDULE</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Regular Tour -->
+            <div class="glass-panel rounded-3xl p-8 md:p-10 hover:bg-white/5 transition-colors duration-500">
+                <h3 class="text-xl text-rookie-purple font-semibold mb-6 tracking-widest uppercase">Tour Schedule</h3>
+                <ul class="space-y-6">
+                    <template x-for="item in schedule" :key="item.city">
+                        <li class="flex flex-col md:flex-row md:items-baseline justify-between border-b border-white/10 pb-4 last:border-0">
+                            <span class="text-2xl font-light text-white" x-text="item.date"></span>
+                            <div class="text-right md:text-right mt-2 md:mt-0">
+                                <span class="block text-lg font-bold" x-text="t[lang].cities[item.cityKey] || item.city"></span>
+                                <span class="block text-sm text-white/50" x-text="t[lang].venues[item.venueKey] || item.venue"></span>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <!-- Encore -->
+            <div class="glass-panel rounded-3xl p-8 md:p-10 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-rookie-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <h3 class="text-xl text-white font-semibold mb-6 tracking-widest uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    Encore Live
+                </h3>
+                <div class="h-full flex flex-col justify-center">
+                    <div class="text-4xl md:text-5xl font-thin mb-2">12.5 - 12.6</div>
+                    <div class="text-2xl md:text-3xl font-bold mb-1">Tokyo</div>
+                    <div class="text-white/60">Zepp DiverCity (TOKYO)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ALBUM "First Note" -->
+    <section class="py-24 bg-gradient-to-b from-black to-rookie-dark">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+                
+                <!-- Album Art & Buying Info -->
+                <div class="lg:w-1/3 sticky top-24">
+                    <div class="relative group">
+                        <img src="https://live.btm-m.site/Rookie/FN-Cover.png" alt="First Note Cover" class="rounded-2xl shadow-2xl w-full aspect-square object-cover mb-8 group-hover:scale-[1.02] transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x600/2a2a2a/FFF?text=Album+Cover'">
+                        <div class="absolute -inset-4 bg-rookie-purple/20 blur-2xl -z-10 rounded-full opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                    </div>
+
+                    <h3 class="text-3xl font-bold leading-tight mb-2">First Note</h3>
+                    <p class="text-white/50 text-sm mb-6">Art by OrOrOr...</p>
+
+                    <div class="space-y-1 text-sm text-gray-400 mb-8">
+                        <p>2022.1.19 (Wed.) Release</p>
+                        <p class="text-white font-medium">2025.8.20 (Wed.) Re-release</p>
+                    </div>
+
+                    <!-- Pricing Logic -->
+                    <div class="glass-panel p-6 rounded-xl mb-6">
+                        <div class="mb-4">
+                            <span class="text-xs text-rookie-purple font-bold tracking-widest uppercase">Standard Edition</span>
+                            <div class="text-2xl font-light" x-text="getPrice('standard')"></div>
+                        </div>
+                        <div>
+                            <span class="text-xs text-white/60 font-bold tracking-widest uppercase">Limited Edition</span>
+                            <div class="text-2xl font-light" x-text="getPrice('limited')"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <a href="https://0m-p.lnk.to/FN" target="_blank" class="w-full bg-white text-black py-3 rounded-lg text-center font-bold hover:bg-gray-200 transition">Listen / Download</a>
+                        <a href="https://0m-p.lnk.to/FN_ReV" target="_blank" class="w-full border border-white/20 hover:bg-white/10 text-white py-3 rounded-lg text-center font-medium transition">Buying (Re-released)</a>
+                        <a href="https://album.btm-m.site/FN" target="_blank" class="text-xs text-center text-white/40 hover:text-white mt-2">Visit Special Site &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Track List -->
+                <div class="lg:w-2/3 w-full">
+                    <div class="glass-panel rounded-3xl p-8 md:p-12">
+                        <h4 class="text-xl font-bold mb-8 flex items-center gap-3">
+                            <span class="bg-white text-black text-xs px-2 py-1 rounded">DISC.1</span>
+                            First Note
+                        </h4>
+                        
+                        <ul class="space-y-4 font-light">
+                            <template x-for="(track, index) in tracks" :key="index">
+                                <li class="flex gap-4 group hover:pl-2 transition-all duration-300">
+                                    <span class="text-white/30 font-mono text-sm pt-1" x-text="formatTrackNum(index + 1)"></span>
+                                    <div class="flex-1 border-b border-white/5 pb-4 group-last:border-0">
+                                        <div class="text-lg leading-snug">
+                                            <!-- Complex Logic for Song Titles -->
+                                            <span x-html="getTrackTitle(track)"></span>
+                                        </div>
+                                        <template x-if="track.note">
+                                             <span class="text-xs text-rookie-purple mt-1 block" x-text="track.note"></span>
+                                        </template>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+
+                        <div class="mt-12 pt-8 border-t border-white/10">
+                            <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
+                                <span class="bg-gray-800 text-white border border-white/20 text-xs px-2 py-1 rounded">DISC.2</span>
+                                Voice Drama "It's My First Live"
+                            </h4>
+                            <p class="text-xs text-rookie-purple mb-4 border border-rookie-purple/30 inline-block px-2 py-0.5 rounded">Only Limited Edition</p>
+                            
+                            <div class="text-sm text-white/60 space-y-2">
+                                <p>Script / Director : <span class="text-white">山中拓也</span></p>
+                                <p>Cast : <span class="text-white">0M_P, White, OrOrOr.., Yuse Totto</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WORLD TOUR TEASER -->
+    <section class="relative py-32 overflow-hidden flex items-center justify-center bg-black">
+        <div class="absolute inset-0 opacity-30 bg-[url('https://live.btm-m.site/Rookie-26/kv.png')] bg-cover bg-fixed bg-center blur-sm scale-110"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <p class="text-rookie-purple font-bold tracking-[0.5em] mb-4 text-sm animate-pulse">COMING SOON</p>
+            <h2 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                0M_P WORLD TOUR 2027<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white italic">"HERE,LIGHT"</span>
+            </h2>
+            <p class="text-xl md:text-2xl font-light mb-8 text-white/80" x-text="t[lang].tourDesc"></p>
+            <a href="https://tour.btm-m.site/27" target="_blank" class="inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-black transition duration-300 rounded-full tracking-widest text-sm">
+                OFFICIAL SITE
+            </a>
+        </div>
+    </section>
+
+    <!-- 6. BEST ALBUM -->
+    <section class="py-24 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">10th ANNIVERSARY COMPILATION ALBUM</h2>
+                    <h3 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rookie-purple to-white">"BEST of 0M_P"</h3>
+                </div>
+                <div class="text-right mt-6 md:mt-0">
+                    <p class="text-2xl font-mono">2026.8.26 Release</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Jackets -->
+                <div class="flex flex-col gap-8">
+                    <div class="flex gap-4 items-end">
+                        <img src="https://album.btm-m.site/10th_BEST/jacket.png" class="w-1/2 rounded-lg shadow-lg grayscale hover:grayscale-0 transition duration-500" alt="Regular Edition" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2a2a2a/FFF?text=Regular'">
+                        <img src="https://album.btm-m.site/10th_BEST/jacket_cle.png" class="w-1/2 rounded-lg shadow-lg border border-white/10" alt="Limited Edition" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2a2a2a/FFF?text=Limited'">
+                    </div>
+                    <p class="text-xs text-white/40 text-center">Regular Edition & Complete Limited Edition</p>
+                </div>
+
+                <!-- Content -->
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
+                    <p class="text-lg leading-relaxed mb-6 text-white/80" x-text="t[lang].bestAlbumDesc"></p>
+                    <div class="bg-white/5 p-6 rounded-xl border border-white/5">
+                        <h4 class="text-rookie-purple font-bold mb-3">DISC.2 Re : Wind</h4>
+                        <ul class="text-sm space-y-2 text-white/70">
+                            <li>• 这是一首写给回忆的摇滚 -Japanese Ver.- (Covered by Ado)</li>
+                            <li>• /World/Dream/ (Re-created by DECO*27)</li>
+                            <li>• 愛言葉III (Covered by 0M_P)</li>
+                        </ul>
+                    </div>
+                    <a href="https://album.btm-m.site/10th_BEST" class="mt-8 text-rookie-purple hover:text-white transition flex items-center gap-2">
+                        View Details <span class="text-lg">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PROFILE & INFO -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="purple-glow bottom-0 right-0 opacity-50"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-12 items-center">
+            
+            <!-- Profile -->
+            <div class="md:col-span-1 flex flex-col items-center text-center">
+                <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-white/10 shadow-[0_0_30px_rgba(124,58,237,0.4)] mb-6">
+                    <img src="https://links.btm-m.site/Avatar.png" alt="0M_P Avatar" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/200x200/2a2a2a/FFF?text=Avatar'">
+                </div>
+                <h2 class="text-3xl font-bold mb-2">0M_P</h2>
+                <p class="text-xs uppercase tracking-widest text-white/50 mb-4">Sound Producer / Singer<br>VOCALOID Producer / Writer</p>
+                <div class="text-sm text-white/70 space-y-3 leading-relaxed" x-text="t[lang].bio"></div>
+            </div>
+
+            <!-- Other Info -->
+            <div class="md:col-span-2 space-y-8">
+                <!-- Links Box -->
+                <div class="glass-panel p-8 rounded-2xl">
+                    <h3 class="text-sm font-bold text-white/40 uppercase mb-4">Live Brands</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="https://vlive.btm-m.site" class="block hover:translate-x-2 transition-transform duration-300">
+                                <span class="text-lg font-medium">0M_P Virtual Live "On-Site"</span>
+                                <span class="text-xs text-white/40 ml-2">vlive.btm-m.site</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://tour.btm-m.site" class="block hover:translate-x-2 transition-transform duration-300">
+                                <span class="text-lg font-medium">0M_P WORLD TOUR</span>
+                                <span class="text-xs text-white/40 ml-2">tour.btm-m.site</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-sm font-bold text-white/40 uppercase mb-4 mt-8">Discography</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="https://album.btm-m.site/5th" class="group flex items-center justify-between">
+                                <div>
+                                    <span class="block text-lg font-medium group-hover:text-rookie-purple transition">5th Album "Brand New World"</span>
+                                    <span class="text-xs text-white/40">2025.9.10 Release</span>
+                                </div>
+                                <span class="opacity-0 group-hover:opacity-100 transition">&rarr;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-white/10 text-center md:text-left">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <!-- Logos -->
+            <div class="flex flex-col items-center md:items-start gap-4">
+                <a href="https://www.universal-music.co.jp/" target="_blank" class="opacity-70 hover:opacity-100 transition duration-300">
+                    <img src="https://www.universalmusic.com/wp-content/themes/umgcore2/assets/img/logo.png" alt="UMG" class="h-12 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/120x50/000/FFF?text=UMG'">
+                </a>
+            </div>
+
+            <!-- Credits -->
+            <div class="text-[10px] md:text-xs text-white/40 uppercase tracking-wider space-y-1 text-center md:text-right">
+                <p>Main Visual & Art Directed by OrOrOr...</p>
+                <p>Web Designed by Cold STUDIO / Design Director : White / Concept Artist : 0M_P</p>
+                <div class="mt-4 pt-4 border-t border-white/5">
+                    <p>"First Note" ℗ 2022 (1-9), 2025 (10) UNIVERSAL MUSIC LLC / 0M_P</p>
+                    <p>© 2026 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
