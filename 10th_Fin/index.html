@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P FINALE LIVE "YOU NEED"</title>
+    
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Inter (Google Sans fallback), Noto Sans SC (MiSans fallback), Noto Sans JP (LINESeedJP fallback) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS for layout utilities -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            /* Theme Colors */
+            --color-bg: #FAFAFA;
+            --color-black: #0A0A0A;
+            --color-ink-blue: #0F2540; /* 墨蓝色 */
+            --color-ink-pink: #D93668; /* 墨粉红色 */
+            
+            /* Typography: Exact requests with robust fallbacks */
+            --font-en: 'Google Sans', 'Inter', sans-serif;
+            --font-zh: 'Google Sans', 'Inter', 'MiSans', 'Noto Sans SC', sans-serif;
+            --font-jp: 'Google Sans', 'Inter', 'LINESeedJP', 'Noto Sans JP', sans-serif;
+            --font-rockwell: 'Rockwell', 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-black);
+            font-family: var(--font-jp); /* Default to JP, overwritten by JS dynamically */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Language Switcher Logic via CSS */
+        body.lang-jp [data-lang="zh"], body.lang-jp [data-lang="en"] { display: none !important; }
+        body.lang-zh [data-lang="jp"], body.lang-zh [data-lang="en"] { display: none !important; }
+        body.lang-en [data-lang="jp"], body.lang-en [data-lang="zh"] { display: none !important; }
+
+        /* Font family switching based on lang state */
+        body.lang-en { font-family: var(--font-en); }
+        body.lang-zh { font-family: var(--font-zh); }
+        body.lang-jp { font-family: var(--font-jp); }
+
+        .font-rockwell {
+            font-family: var(--font-rockwell) !important;
+        }
+
+        /* Comic Halftone Background */
+        .halftone-bg {
+            background-image: radial-gradient(var(--color-black) 10%, transparent 10%);
+            background-size: 12px 12px;
+            background-position: 0 0;
+            opacity: 0.05;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Comic UI Elements - STRICTLY RIGHT ANGLES (No border-radius) */
+        .comic-panel {
+            background-color: #FFF;
+            border: 4px solid var(--color-black);
+            box-shadow: 8px 8px 0px var(--color-ink-blue);
+            position: relative;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        /* Secondary shadow color for visual hierarchy */
+        .comic-panel.pink-shadow {
+            box-shadow: 8px 8px 0px var(--color-ink-pink);
+        }
+
+        /* Interactive panels */
+        .comic-panel.interactive:active {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px var(--color-ink-blue);
+        }
+
+        /* Panel Title Badges */
+        .comic-badge {
+            background-color: var(--color-black);
+            color: #FFF;
+            padding: 0.25rem 0.75rem;
+            font-weight: 900;
+            display: inline-block;
+            border: 2px solid var(--color-black);
+            position: absolute;
+            top: -1.2rem;
+            left: -4px;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .comic-badge.pink {
+            background-color: var(--color-ink-pink);
+            border-color: var(--color-ink-pink);
+        }
+
+        /* Dotted borders for separation */
+        .border-dotted-thick {
+            border-top: 4px dotted var(--color-black);
+        }
+
+        /* Language Switcher UI */
+        .lang-switcher {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            display: flex;
+            border: 3px solid var(--color-black);
+            background: #FFF;
+            box-shadow: 4px 4px 0px var(--color-ink-pink);
+        }
+        .lang-btn {
+            padding: 0.25rem 0.75rem;
+            font-weight: 900;
+            font-family: var(--font-en);
+            cursor: pointer;
+            border-right: 3px solid var(--color-black);
+            transition: all 0.2s;
+        }
+        .lang-btn:last-child {
+            border-right: none;
+        }
+        .lang-btn.active {
+            background-color: var(--color-black);
+            color: #FFF;
+        }
+
+        /* UMG Logo Mask for coloring */
+        .umg-logo {
+            background-color: var(--color-black);
+            -webkit-mask: url('https://links.btm-m.site/UMGLOGO.svg') no-repeat center;
+            mask: url('https://links.btm-m.site/UMGLOGO.svg') no-repeat center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            width: 100%;
+            height: 40px;
+            display: block;
+        }
+
+        /* Striped Highlight */
+        .striped-highlight {
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 5px,
+                rgba(15, 37, 64, 0.1) 5px,
+                rgba(15, 37, 64, 0.1) 10px
+            );
+        }
+
+        /* Container specific for vertical screens */
+        .mobile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="lang-jp">
+    <div class="halftone-bg"></div>
+
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <div class="lang-btn active" onclick="setLanguage('jp')" id="btn-jp">JP</div>
+        <div class="lang-btn" onclick="setLanguage('zh')" id="btn-zh">ZH</div>
+        <div class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</div>
+    </div>
+
+    <!-- MAIN CONTAINER (Mobile optimized) -->
+    <div class="mobile-container pt-16 pb-12">
+        
+        <!-- HERO SECTION -->
+        <header class="comic-panel mb-6 overflow-hidden">
+            <!-- KV Image 16:9 -->
+            <div class="w-full aspect-video border-b-4 border-black relative bg-black">
+                <img src="https://live.btm-m.site/10th_Fin/kv.png" alt="Key Visual" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 bg-black text-white px-3 py-1 font-rockwell text-sm tracking-widest border-t-2 border-r-2 border-white">
+                    PROJECT FINALE
+                </div>
+            </div>
+            
+            <div class="p-6 striped-highlight flex flex-col items-center text-center">
+                <img src="https://live.btm-m.site/10th_Fin/logo.svg" alt="LOGO" class="w-4/5 max-w-[300px] mb-2 drop-shadow-md">
+                <h2 class="font-rockwell text-2xl font-black mb-1 text-[#0A0A0A]">OFFICIAL SITE</h2>
+            </div>
+        </header>
+
+        <!-- EVENT INFO SECTION -->
+        <section class="comic-panel mb-10 p-6 bg-[#0F2540] text-white text-center flex flex-col items-center">
+            <div class="comic-badge pink" style="top: -16px;">
+                <span data-lang="jp">INFO</span>
+                <span data-lang="zh">演出信息</span>
+                <span data-lang="en">INFO</span>
+            </div>
+            
+            <p class="font-black text-3xl tracking-widest mb-1 text-white">2027.7.17 - 7.18</p>
+            <p class="font-bold text-lg mb-6 text-gray-200">
+                <span data-lang="jp">at MUFG Stadium (国立競技場)</span>
+                <span data-lang="zh">at MUFG Stadium (国立竞技场)</span>
+                <span data-lang="en">at MUFG Stadium (National Stadium)</span>
+            </p>
+            
+            <div class="bg-white text-black font-black text-lg py-2 px-5 border-4 border-black transform -skew-x-6 shadow-[4px_4px_0px_#D93668]">
+                <div class="transform skew-x-6 text-[#D93668]">
+                    <span data-lang="jp">公演：16:00 OPEN / 18:00 START</span>
+                    <span data-lang="zh">演出：16:00 OPEN / 18:00 START</span>
+                    <span data-lang="en">SHOW：16:00 OPEN / 18:00 START</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKETS & SEATING -->
+        <section class="mt-14 relative">
+            <h2 class="text-3xl font-black mb-8 transform -skew-x-6 text-[#0A0A0A] tracking-tighter" style="-webkit-text-stroke: 1px #0A0A0A; text-shadow: 4px 4px 0px #0F2540, 4px 4px 0px #0F2540, 4px 4px 0px #0F2540; color: white;">
+                <span data-lang="jp">TICKETS & SEATING</span>
+                <span data-lang="zh">TICKETS & SEATING</span>
+                <span data-lang="en">TICKETS & SEATING</span>
+            </h2>
+
+            <!-- Premium Ticket -->
+            <div class="comic-panel pink-shadow p-5 pt-8 bg-[#0F2540] text-white">
+                <div class="comic-badge pink" style="top: -16px;">
+                    <span data-lang="jp">VIP</span>
+                    <span data-lang="zh">VIP</span>
+                    <span data-lang="en">VIP</span>
+                </div>
+                <h3 class="font-black text-2xl mb-1 text-[#D93668]">
+                    <span data-lang="jp">プレミアム「Zero Mind」席</span>
+                    <span data-lang="zh">Premium "Zero Mind" 席</span>
+                    <span data-lang="en">Premium "Zero Mind" Seats</span>
+                </h3>
+                <p class="font-bold text-xl mb-4">¥33,000 <span class="text-sm font-normal">(Tax in)</span></p>
+                
+                <div class="bg-white text-black p-3 border-2 border-black font-bold text-sm space-y-2">
+                    <p>
+                        <span data-lang="jp">・アリーナ前方ブロック保証</span>
+                        <span data-lang="zh">・保证内场前方区块</span>
+                        <span data-lang="en">・Guaranteed Front Arena Block</span>
+                    </p>
+                    <p>
+                        <span data-lang="jp">・限定メモリアルグッズ（非売品）付</span>
+                        <span data-lang="zh">・附赠限定纪念周边（非卖品）</span>
+                        <span data-lang="en">・Exclusive Memorial Goods Included</span>
+                    </p>
+                    <p>
+                        <span data-lang="jp">・専用入場ゲート利用</span>
+                        <span data-lang="zh">・使用专用入场通道</span>
+                        <span data-lang="en">・Exclusive Entrance Gate</span>
+                    </p>
+                    <p>
+                        <span data-lang="jp">・「After Show Thank-you Movie」視聴シリアルコード</span>
+                        <span data-lang="zh">・演后感谢视频观看序列号</span>
+                        <span data-lang="en">・"After Show Thank-you Movie" Serial Code</span>
+                    </p>
+                </div>
+                <p class="text-xs mt-3 text-gray-300">
+                    <span data-lang="jp">※0M_P MEMBERS "Zero Mind" 会員先行のみでの販売。</span>
+                    <span data-lang="zh">※仅限0M_P会员俱乐部"Zero Mind"先行抽选发售。</span>
+                    <span data-lang="en">*Available only via 0M_P MEMBERS "Zero Mind" advance lottery.</span>
+                </p>
+            </div>
+
+            <!-- Normal Tickets Grid (Stacked for mobile) -->
+            <div class="space-y-4">
+                <div class="comic-panel p-4">
+                    <h3 class="font-black text-xl">S席 <span class="text-base font-normal">(指定席)</span></h3>
+                    <p class="font-bold text-lg text-[#0F2540]">¥16,500 <span class="text-xs">(Tax in)</span></p>
+                    <p class="text-sm mt-2 font-bold">
+                        <span data-lang="jp">アリーナ席およびスタンド1層目・2層目の中央エリア。</span>
+                        <span data-lang="zh">内场席位及看台1层、2层中央区域。</span>
+                        <span data-lang="en">Arena seats and 1st/2nd tier stand center area.</span>
+                    </p>
+                </div>
+
+                <div class="comic-panel p-4">
+                    <h3 class="font-black text-xl">A席 <span class="text-base font-normal">(指定席)</span></h3>
+                    <p class="font-bold text-lg text-[#0F2540]">¥13,200 <span class="text-xs">(Tax in)</span></p>
+                    <p class="text-sm mt-2 font-bold">
+                        <span data-lang="jp">スタンド全域。</span>
+                        <span data-lang="zh">看台全域。</span>
+                        <span data-lang="en">All stand areas.</span>
+                    </p>
+                </div>
+
+                <div class="comic-panel p-4">
+                    <h3 class="font-black text-xl">ファミリー席 <span class="text-base font-normal">Family Seats</span></h3>
+                    <p class="font-bold text-lg text-[#0F2540]">¥11,000 <span class="text-xs">/ 1枚 (Tax in)</span></p>
+                    <p class="text-sm mt-2 font-bold">
+                        <span data-lang="jp">着席指定席。スタンド席内、お子様連れでも見やすいエリア。</span>
+                        <span data-lang="zh">入座指定席。看台内适合携带儿童观看的区域。</span>
+                        <span data-lang="en">Seated only. Stand area optimized for families with children.</span>
+                    </p>
+                    <p class="text-xs mt-1 text-[#D93668]">※2枚以上、最大4枚まで申し込み可</p>
+                </div>
+
+                <div class="comic-panel p-4 bg-gray-100">
+                    <h3 class="font-black text-lg">注釈付指定席 / 視界制限席</h3>
+                    <p class="font-bold text-md text-gray-700">¥9,900 <span class="text-xs">(Tax in)</span></p>
+                    <p class="text-xs mt-1 font-bold">
+                        <span data-lang="jp">ステージの全体および演出の一部が見えにくいお席となります。</span>
+                        <span data-lang="zh">舞台整体及部分演出效果可能存在视野遮挡。</span>
+                        <span data-lang="en">Seats with partially restricted views of the stage and effects.</span>
+                    </p>
+                </div>
+
+                <div class="comic-panel p-4 bg-gray-100">
+                    <h3 class="font-black text-lg">ステージ裏体感席 (音席)</h3>
+                    <p class="font-bold text-md text-gray-700">¥7,700 <span class="text-xs">(Tax in)</span></p>
+                    <p class="text-xs mt-1 font-bold">
+                        <span data-lang="jp">ステージの真裏や真横に位置し、ステージおよびスクリーンは一切見えません。会場の音響と空気感を一緒に楽しんでいただくための特別席です。</span>
+                        <span data-lang="zh">位于舞台正后方或侧方，无法看到舞台和屏幕。仅供体验现场音效与氛围的特别席位。</span>
+                        <span data-lang="en">Located behind/beside the stage. No visual of stage/screens. Audio experience only.</span>
+                    </p>
+                    <p class="text-xs mt-1 text-[#D93668]">
+                        <span data-lang="jp">※映像が見えないことによる返金不可</span>
+                        <span data-lang="zh">※不可因视野原因退款</span>
+                        <span data-lang="en">*No refunds for lack of visibility</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCHEDULE -->
+        <section class="mt-16 relative">
+            <div class="comic-panel p-6 pt-10">
+                <div class="comic-badge" style="top: -16px;">
+                    <span data-lang="jp">SCHEDULE</span>
+                    <span data-lang="zh">售票日程</span>
+                    <span data-lang="en">SALES SCHEDULE</span>
+                </div>
+                
+                <div class="relative border-l-4 border-black ml-2 space-y-8 pb-4">
+                    <!-- R1 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-4 h-4 bg-[#D93668] border-2 border-black -left-[10px] top-1"></div>
+                        <h4 class="font-black text-lg leading-tight bg-[#D93668] text-white inline-block px-2 border-2 border-black mb-1">Round 1</h4>
+                        <p class="font-bold">0M_P MEMBERS "Zero Mind"</p>
+                        <p class="text-sm font-rockwell font-bold text-[#0F2540]">2026.11.22 - 12.13</p>
+                        <p class="text-xs mt-1">
+                            <span data-lang="jp">全席種対象の最優先抽選。最も当選確率が高く、良席が期待できる枠です。</span>
+                            <span data-lang="zh">面向全席种的最优先抽选。中选率最高、最易获好座位的名额。</span>
+                            <span data-lang="en">Top priority lottery for all seats. Highest win rate and best seats.</span>
+                        </p>
+                    </div>
+                    
+                    <!-- R2 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-4 h-4 bg-white border-2 border-black -left-[10px] top-1"></div>
+                        <h4 class="font-black text-lg leading-tight bg-black text-white inline-block px-2 border-2 border-black mb-1">Round 2</h4>
+                        <p class="font-bold">YouTube / Playguide</p>
+                        <p class="text-sm font-rockwell font-bold text-[#0F2540]">2027.1.15 - 1.31</p>
+                        <p class="text-xs mt-1">
+                            <span data-lang="jp">10周年ドキュメンタリー映像公開に合わせた特別枠。</span>
+                            <span data-lang="zh">配合10周年纪录片公开的特别抽选名额。</span>
+                            <span data-lang="en">Special lottery aligned with the 10th anniversary documentary release.</span>
+                        </p>
+                    </div>
+
+                    <!-- R3 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-4 h-4 bg-white border-2 border-black -left-[10px] top-1"></div>
+                        <h4 class="font-black text-lg leading-tight bg-black text-white inline-block px-2 border-2 border-black mb-1">Round 3</h4>
+                        <p class="font-bold">Official 1st Lottery</p>
+                        <p class="text-sm font-rockwell font-bold text-[#0F2540]">2027.2.15 - 3.7</p>
+                    </div>
+
+                    <!-- R4 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-4 h-4 bg-white border-2 border-black -left-[10px] top-1"></div>
+                        <h4 class="font-black text-lg leading-tight bg-black text-white inline-block px-2 border-2 border-black mb-1">Round 4</h4>
+                        <p class="font-bold">Official 2nd Lottery</p>
+                        <p class="text-sm font-rockwell font-bold text-[#0F2540]">2027.3.20 - 4.5</p>
+                    </div>
+
+                    <!-- Final -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-4 h-4 bg-[#0F2540] border-2 border-black -left-[10px] top-1"></div>
+                        <h4 class="font-black text-lg leading-tight bg-[#0F2540] text-white inline-block px-2 border-2 border-black mb-1">Final</h4>
+                        <p class="font-bold">General Sales (First-come)</p>
+                        <p class="text-sm font-rockwell font-bold text-[#D93668]">2027.5.22 10:00 - 6.11 22:59</p>
+                    </div>
+
+                    <!-- Trade -->
+                    <div class="relative pl-6 pt-4 border-dotted-thick">
+                        <h4 class="font-black text-lg">Ticket Trade <span class="text-sm font-normal">公式リセール</span></h4>
+                        <p class="text-sm font-rockwell font-bold">2027.6.15 -</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW TO APPLY -->
+        <section class="mt-16">
+            <h2 class="text-2xl font-black mb-6 border-b-4 border-black pb-2 inline-block">
+                <span data-lang="jp">チケット申し込み方法</span>
+                <span data-lang="zh">购票指南</span>
+                <span data-lang="en">HOW TO APPLY</span>
+            </h2>
+
+            <div class="flex flex-col gap-6">
+                <!-- Japan -->
+                <div class="comic-panel p-5">
+                    <h3 class="font-black text-xl mb-3 flex items-center gap-2">
+                        <span class="bg-black text-white px-2 py-1 text-sm font-rockwell">1</span>
+                        JAPAN PLAYGUIDES
+                    </h3>
+                    <ul class="text-sm font-bold space-y-2">
+                        <li><span class="text-[#D93668] mr-1">■</span> ローソンチケット（ローチケ）</li>
+                        <li><span class="text-[#D93668] mr-1">■</span> 必須: 日本国内携帯電話番号(SMS認証)</li>
+                        <li><span class="text-[#D93668] mr-1">■</span> 決済: クレジットカード、コンビニ決済</li>
+                        <li><span class="text-[#D93668] mr-1">■</span> 受取: ローチケ電子チケットアプリ</li>
+                    </ul>
+                </div>
+
+                <!-- Overseas -->
+                <div class="comic-panel pink-shadow p-5">
+                    <h3 class="font-black text-xl mb-3 flex items-center gap-2">
+                        <span class="bg-[#D93668] text-white px-2 py-1 text-sm font-rockwell">2</span>
+                        OVERSEAS TICKETS
+                    </h3>
+                    <ul class="text-sm font-bold space-y-2 mb-3">
+                        <li>
+                            <span data-lang="jp">日本の電話番号は不要。メールアドレスとパスポート情報で登録可能。</span>
+                            <span data-lang="zh">无需日本手机号，使用邮箱及护照信息即可注册。</span>
+                            <span data-lang="en">No Japanese phone number required. Register with email & passport.</span>
+                        </li>
+                        <li>
+                            <span data-lang="jp">決済: 国際クレジットカード, WeChat Pay, Alipay, JD Pay, Douyin Pay</span>
+                            <span data-lang="zh">支付: 国际信用卡, 微信支付, 支付宝, 京东支付, 抖音支付</span>
+                            <span data-lang="en">Payment: Int'l Credit Card, WeChat Pay, Alipay, JD Pay, Douyin Pay</span>
+                        </li>
+                        <li>
+                            <span data-lang="jp">受取: QRコード電子チケット または 当日会場「海外専用窓口(Will Call)」発券</span>
+                            <span data-lang="zh">取票: QR码电子票 或 当日演出现场海外窗口(Will Call)取票</span>
+                            <span data-lang="en">Pickup: QR e-ticket OR Will Call at venue on show day</span>
+                        </li>
+                    </ul>
+                    <div class="bg-[#0F2540] text-white p-2 text-xs border-2 border-black">
+                        <span data-lang="jp">特記事項: JD Baitiaoまたは抖音支付をご利用の場合、最大18％の特典割引が適用されます。</span>
+                        <span data-lang="zh">特惠信息: 使用京东白条或抖音支付，最高可享18%专属折扣。</span>
+                        <span data-lang="en">Special: Up to 18% discount when using JD Baitiao or Douyin Pay.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STREAMING -->
+        <section class="mt-16">
+            <div class="comic-panel p-5 bg-[#FAFAFA] border-[6px] border-[#0A0A0A]">
+                <div class="text-center border-b-4 border-black pb-4 mb-4">
+                    <h2 class="font-black text-2xl tracking-wide">ONLINE STREAMING</h2>
+                    <p class="font-bold mt-1">
+                        <span data-lang="jp">オンライン生配信 実施概要</span>
+                        <span data-lang="zh">线上直播 实施概要</span>
+                        <span data-lang="en">Online Live Streaming Info</span>
+                    </p>
+                </div>
+
+                <div class="text-center font-rockwell font-bold text-xl mb-6 bg-black text-white py-2">
+                    2027.7.18 (Sat)
+                    <div class="text-sm font-sans mt-1">17:30 OPEN / 18:00 START (JST)</div>
+                </div>
+
+                <div class="space-y-4 text-sm font-bold">
+                    <div class="border-2 border-black p-3 striped-highlight">
+                        <div class="text-[#D93668] mb-1 text-xs uppercase font-black">Platforms</div>
+                        <p>【JP / Global】ZAIKO / SPWN / U-NEXT / ABEMA</p>
+                        <p class="mt-1">【Mainland China】bilibili / MORO Streaming</p>
+                    </div>
+
+                    <div class="border-2 border-black p-3">
+                        <div class="text-[#0F2540] mb-1 text-xs uppercase font-black">Archive / VOD</div>
+                        <p>〜 2026.8.19 (Wed) 23:59 (JST)</p>
+                        <p class="text-xs font-normal mt-1">
+                            <span data-lang="jp">冒頭30分無料試聴: YouTube / 抖音 / TikTok / bilibili</span>
+                            <span data-lang="zh">开场30分钟免费试看: YouTube / 抖音 / TikTok / bilibili</span>
+                            <span data-lang="en">First 30 mins free preview on: YouTube / Douyin / TikTok / bilibili</span>
+                        </p>
+                    </div>
+
+                    <div class="border-2 border-black p-3">
+                        <div class="text-black mb-1 text-xs uppercase font-black">Tickets</div>
+                        <ul class="space-y-1">
+                            <li>
+                                <span data-lang="jp">【Japan】 ¥4,400 (Tax in)</span>
+                                <span data-lang="zh">【日本】 ¥4,400 (Tax in)</span>
+                                <span data-lang="en">【Japan】 ¥4,400 (Tax in)</span>
+                            </li>
+                            <li>
+                                <span data-lang="jp">【Mainland China】 189 CNY</span>
+                                <span data-lang="zh">【中国大陆】 189 CNY</span>
+                                <span data-lang="en">【Mainland China】 189 CNY</span>
+                            </li>
+                            <li>
+                                <span data-lang="jp">【Global (中国香港、中国マカオ、中国台湾 & その他の国と地域)】 US$ 32.00</span>
+                                <span data-lang="zh">【Global (中国香港, 中国澳门, 中国台湾 & 其他国家和地区)】 US$ 32.00</span>
+                                <span data-lang="en">【Global (Hong Kong, Macao, Taiwan, China & Other Countries/Regions)】 US$ 32.00</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT 0M_P -->
+        <section class="mt-16 mb-12">
+            <div class="comic-panel p-6 flex flex-col md:flex-row items-center md:items-start gap-6">
+                <!-- Avatar block -->
+                <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 border-4 border-black shadow-[4px_4px_0px_#D93668] bg-[#0F2540] rounded-full overflow-hidden">
+                    <img src="https://links.btm-m.site/Avatar.png" alt="0M_P Avatar" class="w-full h-full object-cover">
+                </div>
+                
+                <div class="flex-1 text-center md:text-left">
+                    <h2 class="font-black text-3xl font-rockwell tracking-wider mb-2">0M_P</h2>
+                    <p class="font-bold text-sm bg-black text-white inline-block px-3 py-1 mb-4">
+                        <span data-lang="jp">サウンドプロデューサー / 歌手 / ボカロP / 作家</span>
+                        <span data-lang="zh">音乐制作人 / 歌手 / VOCALOID制作人 / 作家</span>
+                        <span data-lang="en">Sound Producer / Singer / VOCALOID Producer / Writer</span>
+                    </p>
+                    
+                    <div class="text-sm font-bold space-y-2 text-left border-l-4 border-[#0F2540] pl-3">
+                        <p>
+                            <span data-lang="jp">2016年活動開始。ロック要素とエモーショナルなストーリーテリングの融合で知られる。</span>
+                            <span data-lang="zh">2016年开始活动，以将摇滚元素与感性叙事相结合而闻名。</span>
+                            <span data-lang="en">Active since 2016, known for fusing rock elements with emotional storytelling.</span>
+                        </p>
+                        <p>
+                            <span data-lang="jp">2022年、ユニバーサルミュージック傘下Polydor Recordsよりメジャーデビュー。</span>
+                            <span data-lang="zh">2022年从环球音乐旗下的Polydor Records主流出道。</span>
+                            <span data-lang="en">Major debut in 2022 under Polydor Records (Universal Music).</span>
+                        </p>
+                        <p>
+                            <span data-lang="jp">2025年、レーベル「Now2Future RECORDS」を共同設立。所属アーティスト：佐香智久(少年T)、AZKi (hololive)等。</span>
+                            <span data-lang="zh">2025年与环球音乐共同创办音乐厂牌Now2Future RECORDS，旗下艺人有佐香智久、AZKi等。</span>
+                            <span data-lang="en">Co-founded "Now2Future RECORDS" in 2025. Roster includes Tomohisa Sako, AZKi, etc.</span>
+                        </p>
+                        <p class="mt-3 text-[#D93668]">
+                            <span data-lang="jp">代表作: "You Need", "natural love", "Spring of Flowers"</span>
+                            <span data-lang="zh">代表作品: "You Need", "natural love", "Spring of Flowers"</span>
+                            <span data-lang="en">Masterpieces: "You Need", "natural love", "Spring of Flowers"</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End Main Container -->
+
+    <!-- FOOTER (Strictly English as requested) -->
+    <footer class="bg-black text-white border-t-[8px] border-[#0F2540] py-10 px-4 text-center">
+        <div class="max-w-[600px] mx-auto flex flex-col items-center gap-6">
+            
+            <a href="https://www.universal-music.co.jp/" target="_blank" rel="noopener noreferrer" class="w-32 hover:opacity-70 transition">
+                <span class="umg-logo bg-white"></span>
+            </a>
+
+            <div class="font-rockwell text-xs font-bold space-y-1 opacity-80">
+                <p>Key Visual Shot by Kazuki Koike (TOKOYO CAM Inc.)</p>
+                <p>Key Visual Editor & CG Artist: Yasuno Motoi (TOKOYO CAM Inc.)</p>
+            </div>
+
+            <div class="font-rockwell text-xs font-bold mt-4">
+                &copy; 2026 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function setLanguage(lang) {
+            // Update Body Class
+            document.body.className = `lang-${lang}`;
+            
+            // Update active state on buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`btn-${lang}`).classList.add('active');
+        }
+
+        // Initialize based on browser language or default to JP
+        document.addEventListener("DOMContentLoaded", () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('zh')) {
+                setLanguage('zh');
+            } else if (userLang.startsWith('en')) {
+                setLanguage('en');
+            } else {
+                setLanguage('jp'); // Default
+            }
+        });
+    </script>
+</body>
+</html>
