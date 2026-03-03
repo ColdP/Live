@@ -1,0 +1,135 @@
+根据以下内容写一个网页，采用酷+新潮的漫画风设计，包含点阵、直角等日本漫画的元素
+主题色为黑白+墨蓝色+墨粉红色（从前到后占比逐渐减少）
+字体为Google Sans(若用户设备上有，没有则用Inter代替)+MiSans(若用户设备上有，没有则用Noto Sans SC代替)+LINESeedJP(从Google Fonts调用)
+界面支持中日英三语，切换部件写作JP ZH EN
+适配竖屏界面
+
+0M_P 10th ANNIVERSARY PROJECT FINALE LIVE "YOU NEED" Powered by LAWSON
+2027.7.17-7.18 at MUFG Stadium(国立競技場)
+
+[HERO]
+Key Visual (铺满屏幕,16:9): https://live.btm-m.site/10th_Fin/kv.png
+LOGO (大 / 靠左): https://live.btm-m.site/10th_Fin/logo.svg
+[TEXT: OFFICIAL SITE，字体Rockwell，若无则使用替代字体, 靠左]
+公演
+16:00 OPEN / 18:00 START
+
+チケット料金・座席種一覧
+プレミアム「Zero Mind」席 (VIP席)
+価格：33,000円（税込）
+特典：
+・アリーナ前方ブロック保証
+・0M_P 10th ANNIVERSARY PROJECT FINALE LIVE 「YOU NEED」限定メモリアルグッズ（非売品）付
+・専用入場ゲート利用
+・終演後、0M_P本人による「After Show Thank-you Movie」視聴シリアルコード
+※0M_P MEMBERS "Zero Mind" 会員先行のみでの販売。
+
+S席 (指定席)
+価格：16,500円（税込）
+・アリーナ席およびスタンド1層目・2層目の中央エリア。
+
+A席 (指定席)
+価格：13,200円（税込）
+・スタンド全域。
+
+ファミリー席
+価格：11,000円（税込/1枚）
+・着席指定席。スタンド席内、お子様連れでも見やすいエリア。
+※2枚以上、最大4枚まで申し込み可。
+
+注釈付指定席 / 視界制限席
+価格：9,900円（税込）
+・ステージの全体および演出の一部が見えにくいお席となります。
+
+ステージ裏体感席 (音席)
+価格：7,700円（税込）
+・ステージの真裏や真横に位置し、ステージおよびスクリーンは一切見えません。
+・会場の音響と空気感を一緒に楽しんでいただくための特別席です。
+・映像が見えないことによる返金・キャンセルは一切お受けできません。
+
+
+0M_P FINALE LIVE "YOU NEED" チケット販売スケジュール
+[Round 1] 0M_P MEMBERS "Zero Mind" 会員最速先行（抽選）
+受付期間: 2026年11月22日(日) ～ 2026年12月13日(日)
+対象: 0M_Pオフィシャルファンクラブ「Zero Mind」会員
+詳細: 全席種対象の最優先抽選。最も当選確率が高く、良席が期待できる枠です。
+
+[Round 2] YouTube先行 / プレイガイド先行（抽選）
+受付期間: 2027年1月15日(金) ～ 2027年1月31日(日)
+対象: YouTube公式チャンネル登録者およびローソンチケット登録者
+詳細: 10周年ドキュメンタリー映像公開に合わせた特別枠。
+
+[Round 3] オフィシャル1次先行（抽選）
+受付期間: 2027年2月15日(月) ～ 2027年3月7日(日)
+対象: 全ユーザー
+詳細: 公式サイト経由での第一次一般抽選受付。
+
+[Round 4] オフィシャル2次先行（抽選）
+受付期間: 2027年3月20日(土) ～ 2027年4月5日(月)
+対象: 全ユーザー
+詳細: 第二次一般抽選受付。注釈付き指定席等の追加販売を含む場合があります。
+
+[Final] 一般発売（先着）
+受付期間: 2027年5月22日(土) 10:00 ～ 2027年6月11日(金) 22:59
+対象: 全ユーザー
+詳細: 最終販売枠。先着順のため、開始数分での完売が予想されます。
+
+[Ticket Trade] 公式リセール（定価トレード）
+受付期間: 2027年6月15日(火) ～ 各公演前日まで
+詳細: チケット購入後に来場困難となった方と、購入希望者を繋ぐ公式再販プラットフォーム。
+
+チケット申し込み方法
+1. JAPAN PLAYGUIDES（日本国内からの申し込み）
+主要プラットフォーム: ローソンチケット（ローチケ）
+認証条件: 日本国内の携帯電話番号（SMS認証）が必須。
+決済方法: クレジットカード、コンビニ決済（ローソン・ミニストップ）。
+受取方法: ローチケ電子チケットアプリ。
+
+2. OVERSEAS TICKETS（海外専用販売）
+専用ページ: 0M_P公式サイト内「English/International Booking」ページ。
+認証条件: 日本の電話番号は不要。メールアドレスとパスポート情報で登録可能。
+決済方法: 国際クレジットカード（VISA、MasterCard、JCB、UnionPay）、WeChat Pay、Alipay（Incl. Alipay HK）、JD Pay、Douyin Pay
+特記事項: JD Baitiaoまたは抖音支付（Douyin Pay）をご利用の場合、最大18％の特典割引が適用されます。
+受取方法: QRコード電子チケット（公演1週間前に送付）。
+または当日会場の「海外専用窓口（Will Call）」にて発券。
+
+
+オンライン生配信 実施概要
+配信日時
+2027年7月18日(土)
+17:30 OPEN / 18:00 START (JST)
+
+配信プラットフォーム
+【日本国内およびグローバル】ZAIKO / SPWN / U-NEXT / ABEMA
+【中国本土】bilibili / MORO Streaming
+
+アーカイブ配信（見逃し配信）
+～ 2026年8月19日(水) 23:59 (JST) まで
+冒頭30分無料試聴: YouTube / 抖音 (Douyin) / TikTok / bilibili
+
+配信チケット料金（地域別）
+【日本国内】4,400円（税込）
+【中国本土】189元
+【グローバル（日本・中国本土以外）】
+対象地域：中国香港、中国マカオ、中国台湾、およびその他の国と地域
+視聴券価格：US$ 32.00
+※注記：米ドル以外の地域における具体的な販売価格は、各配信サイトの決済画面にてご確認ください。
+
+About 0M_P
+AVATAR: https://links.btm-m.site/Avatar.png
+0M_P
+音乐制作人 / 歌手 / VOCALOID制作人 / 作家
+サウンドプロデューサー / 歌手 / ボカロP / 作家
+Sound Producer / Singer / VOCALOID Producer / Writer
+
+2016年开始活动，以将摇滚元素与感性叙事相结合而闻名。
+2022年从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐。
+2025年与环球音乐共同创办音乐厂牌Now2Future RECORDS，旗下艺人目前有佐香智久(少年T)、虚拟偶像AZKi (hololive)等。
+2026年开始0M_P 10th ANNIVERSARY PROJECT「RE : WiND」
+代表作品: "You Need", "natural love", "Spring of Flowers"
+
+footer（不要翻译，保持英文）
+https://links.btm-m.site/UMGLOGO.svg （UNVIERSAL MUSIC GROUP LOGO，指向https://www.universal-music.co.jp/，标准SVG，支持变色）
+Key Visual Shot by Kazuki Koike (TOKOYO CAM Inc.)
+Key Visual Editor & CG Artist: Yasuno Motoi (TOKOYO CAM Inc.)
+© 2026 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.
