@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0M_P FINALE LIVE "YOU NEED"</title>
+    <title>0M_P 10th ANNIVERSARY PROJECT FINALE LIVE "YOU NEED" Powered by LAWSON</title>
     
     <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,16 +51,21 @@
             font-family: var(--font-rockwell) !important;
         }
 
-        /* Comic Halftone Background */
+        /* Comic Halftone Background & Animation */
+        @keyframes panBg {
+            0% { background-position: 0 0; }
+            100% { background-position: 120px 120px; } /* Multiple of 12px for seamless loop */
+        }
+        
         .halftone-bg {
             background-image: radial-gradient(var(--color-black) 10%, transparent 10%);
             background-size: 12px 12px;
-            background-position: 0 0;
             opacity: 0.05;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
             pointer-events: none;
+            animation: panBg 20s linear infinite;
         }
 
         /* Comic UI Elements - STRICTLY RIGHT ANGLES (No border-radius) */
@@ -80,8 +85,8 @@
 
         /* Interactive panels */
         .comic-panel.interactive:active {
-            transform: translate(4px, 4px);
-            box-shadow: 4px 4px 0px var(--color-ink-blue);
+            transform: translate(4px, 4px) !important;
+            box-shadow: 4px 4px 0px var(--color-ink-blue) !important;
         }
 
         /* Panel Title Badges */
@@ -119,7 +124,14 @@
             border: 3px solid var(--color-black);
             background: #FFF;
             box-shadow: 4px 4px 0px var(--color-ink-pink);
+            /* Slide down entry animation */
+            transform: translateY(-150%);
+            animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
         }
+        @keyframes slideDown {
+            to { transform: translateY(0); }
+        }
+
         .lang-btn {
             padding: 0.25rem 0.75rem;
             font-weight: 900;
@@ -127,6 +139,9 @@
             cursor: pointer;
             border-right: 3px solid var(--color-black);
             transition: all 0.2s;
+        }
+        .lang-btn:hover {
+            background-color: #f0f0f0;
         }
         .lang-btn:last-child {
             border-right: none;
@@ -166,6 +181,30 @@
             width: 100%;
             padding: 1rem;
         }
+
+        /* --- Scroll Animation Classes --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        
+        /* Specific transform for the skewed title to avoid overwriting its existing transform */
+        .animate-on-scroll.skewed-element {
+            transform: translateY(40px) skewX(-6deg);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-on-scroll.skewed-element.is-visible {
+            opacity: 1;
+            transform: translateY(0) skewX(-6deg);
+        }
     </style>
 </head>
 <body class="lang-jp">
@@ -182,7 +221,7 @@
     <div class="mobile-container pt-16 pb-12">
         
         <!-- HERO SECTION -->
-        <header class="comic-panel mb-6 overflow-hidden">
+        <header class="comic-panel mb-6 overflow-hidden animate-on-scroll is-visible">
             <!-- KV Image 16:9 -->
             <div class="w-full aspect-video border-b-4 border-black relative bg-black">
                 <img src="https://live.btm-m.site/10th_Fin/kv.png" alt="Key Visual" class="w-full h-full object-cover">
@@ -198,7 +237,7 @@
         </header>
 
         <!-- EVENT INFO SECTION -->
-        <section class="comic-panel mb-10 p-6 bg-[#0F2540] text-white text-center flex flex-col items-center">
+        <section class="comic-panel mb-10 p-6 bg-[#0F2540] text-white text-center flex flex-col items-center animate-on-scroll delay-100">
             <div class="comic-badge pink" style="top: -16px;">
                 <span data-lang="jp">INFO</span>
                 <span data-lang="zh">演出信息</span>
@@ -223,14 +262,14 @@
 
         <!-- TICKETS & SEATING -->
         <section class="mt-14 relative">
-            <h2 class="text-3xl font-black mb-8 transform -skew-x-6 text-[#0A0A0A] tracking-tighter" style="-webkit-text-stroke: 1px #0A0A0A; text-shadow: 4px 4px 0px #0F2540, 4px 4px 0px #0F2540, 4px 4px 0px #0F2540; color: white;">
+            <h2 class="text-3xl font-black mb-8 transform -skew-x-6 text-[#0A0A0A] tracking-tighter animate-on-scroll skewed-element" style="-webkit-text-stroke: 1px #0A0A0A; text-shadow: 4px 4px 0px #0F2540, 4px 4px 0px #0F2540, 4px 4px 0px #0F2540; color: white;">
                 <span data-lang="jp">TICKETS & SEATING</span>
                 <span data-lang="zh">TICKETS & SEATING</span>
                 <span data-lang="en">TICKETS & SEATING</span>
             </h2>
 
             <!-- Premium Ticket -->
-            <div class="comic-panel pink-shadow p-5 pt-8 bg-[#0F2540] text-white">
+            <div class="comic-panel pink-shadow p-5 pt-8 bg-[#0F2540] text-white animate-on-scroll delay-100">
                 <div class="comic-badge pink" style="top: -16px;">
                     <span data-lang="jp">VIP</span>
                     <span data-lang="zh">VIP</span>
@@ -274,8 +313,12 @@
 
             <!-- Normal Tickets Grid (Stacked for mobile) -->
             <div class="space-y-4">
-                <div class="comic-panel p-4">
-                    <h3 class="font-black text-xl">S席 <span class="text-base font-normal">(指定席)</span></h3>
+                <div class="comic-panel p-4 animate-on-scroll">
+                    <h3 class="font-black text-xl">
+                        <span data-lang="jp">S席 <span class="text-base font-normal">(指定席)</span></span>
+                        <span data-lang="zh">S席 <span class="text-base font-normal">(指定席)</span></span>
+                        <span data-lang="en">S Seats <span class="text-base font-normal">(Reserved)</span></span>
+                    </h3>
                     <p class="font-bold text-lg text-[#0F2540]">¥16,500 <span class="text-xs">(Tax in)</span></p>
                     <p class="text-sm mt-2 font-bold">
                         <span data-lang="jp">アリーナ席およびスタンド1層目・2層目の中央エリア。</span>
@@ -284,8 +327,12 @@
                     </p>
                 </div>
 
-                <div class="comic-panel p-4">
-                    <h3 class="font-black text-xl">A席 <span class="text-base font-normal">(指定席)</span></h3>
+                <div class="comic-panel p-4 animate-on-scroll delay-100">
+                    <h3 class="font-black text-xl">
+                        <span data-lang="jp">A席 <span class="text-base font-normal">(指定席)</span></span>
+                        <span data-lang="zh">A席 <span class="text-base font-normal">(指定席)</span></span>
+                        <span data-lang="en">A Seats <span class="text-base font-normal">(Reserved)</span></span>
+                    </h3>
                     <p class="font-bold text-lg text-[#0F2540]">¥13,200 <span class="text-xs">(Tax in)</span></p>
                     <p class="text-sm mt-2 font-bold">
                         <span data-lang="jp">スタンド全域。</span>
@@ -294,19 +341,31 @@
                     </p>
                 </div>
 
-                <div class="comic-panel p-4">
-                    <h3 class="font-black text-xl">ファミリー席 <span class="text-base font-normal">Family Seats</span></h3>
+                <div class="comic-panel p-4 animate-on-scroll delay-200">
+                    <h3 class="font-black text-xl">
+                        <span data-lang="jp">ファミリー席 <span class="text-base font-normal">Family Seats</span></span>
+                        <span data-lang="zh">家庭席 <span class="text-base font-normal">Family Seats</span></span>
+                        <span data-lang="en">Family Seats</span>
+                    </h3>
                     <p class="font-bold text-lg text-[#0F2540]">¥11,000 <span class="text-xs">/ 1枚 (Tax in)</span></p>
                     <p class="text-sm mt-2 font-bold">
                         <span data-lang="jp">着席指定席。スタンド席内、お子様連れでも見やすいエリア。</span>
                         <span data-lang="zh">入座指定席。看台内适合携带儿童观看的区域。</span>
                         <span data-lang="en">Seated only. Stand area optimized for families with children.</span>
                     </p>
-                    <p class="text-xs mt-1 text-[#D93668]">※2枚以上、最大4枚まで申し込み可</p>
+                    <p class="text-xs mt-1 text-[#D93668]">
+                        <span data-lang="jp">※2枚以上、最大4枚まで申し込み可</span>
+                        <span data-lang="zh">※2张起购，最多可申购4张</span>
+                        <span data-lang="en">*Minimum 2 tickets, maximum 4 tickets per order</span>
+                    </p>
                 </div>
 
-                <div class="comic-panel p-4 bg-gray-100">
-                    <h3 class="font-black text-lg">注釈付指定席 / 視界制限席</h3>
+                <div class="comic-panel p-4 bg-gray-100 animate-on-scroll delay-300">
+                    <h3 class="font-black text-lg">
+                        <span data-lang="jp">注釈付指定席 / 視界制限席</span>
+                        <span data-lang="zh">注释指定席 / 视线受限席</span>
+                        <span data-lang="en">Restricted View Seats</span>
+                    </h3>
                     <p class="font-bold text-md text-gray-700">¥9,900 <span class="text-xs">(Tax in)</span></p>
                     <p class="text-xs mt-1 font-bold">
                         <span data-lang="jp">ステージの全体および演出の一部が見えにくいお席となります。</span>
@@ -315,9 +374,13 @@
                     </p>
                 </div>
 
-                <div class="comic-panel p-4 bg-gray-100">
-                    <h3 class="font-black text-lg">ステージ裏体感席 (音席)</h3>
-                    <p class="font-bold text-md text-gray-700">¥7,700 <span class="text-xs">(Tax in)</span></p>
+                <div class="comic-panel p-4 bg-gray-100 animate-on-scroll delay-300">
+                    <h3 class="font-black text-lg">
+                        <span data-lang="jp">ステージ裏体感席 (音席)</span>
+                        <span data-lang="zh">舞台背面体验席 (音效席)</span>
+                        <span data-lang="en">Stage-back Experience Seats (Audio Only)</span>
+                    </h3>
+                    <p class="font-bold text-md text-gray-700">¥5,500 <span class="text-xs">(Tax in)</span></p>
                     <p class="text-xs mt-1 font-bold">
                         <span data-lang="jp">ステージの真裏や真横に位置し、ステージおよびスクリーンは一切見えません。会場の音響と空気感を一緒に楽しんでいただくための特別席です。</span>
                         <span data-lang="zh">位于舞台正后方或侧方，无法看到舞台和屏幕。仅供体验现场音效与氛围的特别席位。</span>
@@ -333,7 +396,7 @@
         </section>
 
         <!-- SCHEDULE -->
-        <section class="mt-16 relative">
+        <section class="mt-16 relative animate-on-scroll">
             <div class="comic-panel p-6 pt-10">
                 <div class="comic-badge" style="top: -16px;">
                     <span data-lang="jp">SCHEDULE</span>
@@ -403,7 +466,7 @@
 
         <!-- HOW TO APPLY -->
         <section class="mt-16">
-            <h2 class="text-2xl font-black mb-6 border-b-4 border-black pb-2 inline-block">
+            <h2 class="text-2xl font-black mb-6 border-b-4 border-black pb-2 inline-block animate-on-scroll">
                 <span data-lang="jp">チケット申し込み方法</span>
                 <span data-lang="zh">购票指南</span>
                 <span data-lang="en">HOW TO APPLY</span>
@@ -411,40 +474,77 @@
 
             <div class="flex flex-col gap-6">
                 <!-- Japan -->
-                <div class="comic-panel p-5">
+                <div class="comic-panel p-5 animate-on-scroll delay-100">
                     <h3 class="font-black text-xl mb-3 flex items-center gap-2">
                         <span class="bg-black text-white px-2 py-1 text-sm font-rockwell">1</span>
                         JAPAN PLAYGUIDES
                     </h3>
                     <ul class="text-sm font-bold space-y-2">
-                        <li><span class="text-[#D93668] mr-1">■</span> ローソンチケット（ローチケ）</li>
-                        <li><span class="text-[#D93668] mr-1">■</span> 必須: 日本国内携帯電話番号(SMS認証)</li>
-                        <li><span class="text-[#D93668] mr-1">■</span> 決済: クレジットカード、コンビニ決済</li>
-                        <li><span class="text-[#D93668] mr-1">■</span> 受取: ローチケ電子チケットアプリ</li>
+                        <li class="flex items-start">
+                            <span class="text-[#D93668] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">ローソンチケット（ローチケ）</span>
+                                <span data-lang="zh">Lawson Ticket（罗森售票）</span>
+                                <span data-lang="en">Lawson Ticket (L-Tike)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#D93668] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">必須: 日本国内携帯電話番号(SMS認証)</span>
+                                <span data-lang="zh">必须: 日本国内手机号码(SMS认证)</span>
+                                <span data-lang="en">Required: Japanese Mobile Number (SMS Verification)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#D93668] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">決済: クレジットカード、コンビニ決済</span>
+                                <span data-lang="zh">支付: 信用卡、便利店支付</span>
+                                <span data-lang="en">Payment: Credit Card, Convenience Store</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#D93668] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">受取: ローチケ電子チケットアプリ</span>
+                                <span data-lang="zh">取票: 罗森电子票APP (ローチケ)</span>
+                                <span data-lang="en">Pickup: Lawson Electronic Ticket App</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- Overseas -->
-                <div class="comic-panel pink-shadow p-5">
+                <div class="comic-panel pink-shadow p-5 animate-on-scroll delay-200">
                     <h3 class="font-black text-xl mb-3 flex items-center gap-2">
                         <span class="bg-[#D93668] text-white px-2 py-1 text-sm font-rockwell">2</span>
                         OVERSEAS TICKETS
                     </h3>
                     <ul class="text-sm font-bold space-y-2 mb-3">
-                        <li>
-                            <span data-lang="jp">日本の電話番号は不要。メールアドレスとパスポート情報で登録可能。</span>
-                            <span data-lang="zh">无需日本手机号，使用邮箱及护照信息即可注册。</span>
-                            <span data-lang="en">No Japanese phone number required. Register with email & passport.</span>
+                        <li class="flex items-start">
+                            <span class="text-[#0F2540] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">日本の電話番号は不要。メールアドレスとパスポート情報で登録可能。</span>
+                                <span data-lang="zh">无需日本手机号，使用邮箱及护照信息即可注册。</span>
+                                <span data-lang="en">No Japanese phone number required. Register with email & passport.</span>
+                            </div>
                         </li>
-                        <li>
-                            <span data-lang="jp">決済: 国際クレジットカード, WeChat Pay, Alipay, JD Pay, Douyin Pay</span>
-                            <span data-lang="zh">支付: 国际信用卡, 微信支付, 支付宝, 京东支付, 抖音支付</span>
-                            <span data-lang="en">Payment: Int'l Credit Card, WeChat Pay, Alipay, JD Pay, Douyin Pay</span>
+                        <li class="flex items-start">
+                            <span class="text-[#0F2540] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">決済: 国際クレジットカード, WeChat Pay, Alipay, JD Pay, Douyin Pay</span>
+                                <span data-lang="zh">支付: 国际信用卡, 微信支付, 支付宝, 京东支付, 抖音支付</span>
+                                <span data-lang="en">Payment: Int'l Credit Card, WeChat Pay, Alipay, JD Pay, Douyin Pay</span>
+                            </div>
                         </li>
-                        <li>
-                            <span data-lang="jp">受取: QRコード電子チケット または 当日会場「海外専用窓口(Will Call)」発券</span>
-                            <span data-lang="zh">取票: QR码电子票 或 当日演出现场海外窗口(Will Call)取票</span>
-                            <span data-lang="en">Pickup: QR e-ticket OR Will Call at venue on show day</span>
+                        <li class="flex items-start">
+                            <span class="text-[#0F2540] mr-2 mt-[2px]">■</span>
+                            <div>
+                                <span data-lang="jp">受取: QRコード電子チケット または 当日会場「海外専用窓口(Will Call)」発券</span>
+                                <span data-lang="zh">取票: QR码电子票 或 当日演出现场海外窗口(Will Call)取票</span>
+                                <span data-lang="en">Pickup: QR e-ticket OR Will Call at venue on show day</span>
+                            </div>
                         </li>
                     </ul>
                     <div class="bg-[#0F2540] text-white p-2 text-xs border-2 border-black">
@@ -457,7 +557,7 @@
         </section>
 
         <!-- STREAMING -->
-        <section class="mt-16">
+        <section class="mt-16 animate-on-scroll">
             <div class="comic-panel p-5 bg-[#FAFAFA] border-[6px] border-[#0A0A0A]">
                 <div class="text-center border-b-4 border-black pb-4 mb-4">
                     <h2 class="font-black text-2xl tracking-wide">ONLINE STREAMING</h2>
@@ -470,7 +570,7 @@
 
                 <div class="text-center font-rockwell font-bold text-xl mb-6 bg-black text-white py-2">
                     2027.7.18 (Sat)
-                    <div class="text-sm font-sans mt-1">17:30 OPEN / 18:00 START (JST)</div>
+                    <div class="text-sm font-rockwell mt-1">17:30 OPEN / 18:00 START (JST)</div>
                 </div>
 
                 <div class="space-y-4 text-sm font-bold">
@@ -515,7 +615,7 @@
         </section>
 
         <!-- ABOUT 0M_P -->
-        <section class="mt-16 mb-12">
+        <section class="mt-16 mb-12 animate-on-scroll">
             <div class="comic-panel p-6 flex flex-col md:flex-row items-center md:items-start gap-6">
                 <!-- Avatar block -->
                 <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 border-4 border-black shadow-[4px_4px_0px_#D93668] bg-[#0F2540] rounded-full overflow-hidden">
@@ -600,6 +700,27 @@
             } else {
                 setLanguage('jp'); // Default
             }
+
+            // --- Scroll Animations (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px', // Trigger slightly before it comes into full view
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Unobserve after animating to keep the final state
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 </body>
